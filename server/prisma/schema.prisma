@@ -1,0 +1,163 @@
+generator client {
+  provider = "prisma-client"
+  output = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum StatusConnection {
+  PENDING
+  ACCEPTED
+  ACTIVE
+  CLOSED
+}
+
+enum OpportunityType {
+  COURSE
+  EVENT
+  SCHOLARSHIP
+  JOB
+}
+
+enum Role {
+  STUDENT
+  GUIDE
+  ADMIN
+}
+
+model User {
+  id              String   @id @default(uuid())
+  name            String 
+  username        String   @unique
+  email           String   @unique
+  password        String
+  image           String?
+  description     String?
+  role            Role     @default(STUDENT  )
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt      @map("updated_at")
+
+  // Relacionamentos
+  areas                UserArea[]
+  requestedConnections Connection[] @relation("Requester")
+  receivedConnections  Connection[] @relation("Receiver")
+  posts                Post[]
+  likes                Like[]
+
+  @@map("users")
+}
+
+model TechArea {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  description String?
+
+  // Relacionamentos
+  users         UserArea[]
+  connections   Connection[]
+  inspirations  InspirationArea[]
+  opportunities OpportunityArea[]
+
+  @@map("tech_areas")
+}
+
+model UserArea {
+  userId String   @map("user_id")
+  areaId String   @map("field_id")
+
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  area   TechArea @relation(fields: [areaId], references: [id], onDelete: Cascade)
+
+  @@id([userId, areaId])
+  @@map("users_areas")
+}
+
+model Connection {
+  id          String           @id @default(uuid())
+  requesterId String           @map("requester_id")
+  receiverId  String           @map("receiver_id")
+  fieldId     String           @map("field_id")
+  status      StatusConnection @default(PENDING)
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+
+  requester   User     @relation("Requester", fields: [requesterId], references: [id], onDelete: Cascade)
+  receiver    User     @relation("Receiver",  fields: [receiverId],  references: [id], onDelete: Cascade)
+  area        TechArea @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+
+  @@unique([requesterId, receiverId, fieldId])
+  @@map("connections")
+}
+
+model Inspiration {
+  id          String          @id @default(uuid())
+  name        String          
+  description String
+  image       String?
+  areas       InspirationArea[]
+
+  @@map("inspirations")
+}
+
+model InspirationArea {
+  inspirationId String @map("inspiration_id")
+  areaId      String @map("area_id")
+
+  inspiration   Inspiration @relation(fields: [inspirationId], references: [id], onDelete: Cascade)
+  area        TechArea  @relation(fields: [areaId],      references: [id], onDelete: Cascade)
+
+  @@id([inspirationId, areaId])
+  @@map("inspirations_areas")
+}
+
+model Opportunity {
+  id           String          @id @default(uuid())
+  title        String         
+  description  String
+  externalLink String?         @map("external_link")
+  type         OpportunityType
+  createdAt    DateTime        @default(now()) @map("created_at")
+  updatedAt    DateTime        @updatedAt @map("updated_at")
+
+  // Relacionamentos
+  areas        OpportunityArea[]
+
+  @@map("opportunities")
+}
+
+model OpportunityArea {
+  opportunityId String @map("opportunity_id")
+  areaId        String @map("area_id")
+
+  opportunity   Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+  area          TechArea    @relation(fields: [areaId],        references: [id], onDelete: Cascade)
+
+  @@id([opportunityId, areaId])
+  @@map("opportunities_areas")
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  content   String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes     Like[]
+
+  @@map("posts")
+}
+
+model Like {
+  userId String @map("user_id")
+  postId String @map("post_id")
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@id([userId, postId])
+  @@map("likes")
+}
