@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "StatusConnection" AS ENUM ('PENDING', 'ACCEPTED', 'ACTIVE', 'CLOSED');
+CREATE TYPE "StatusConnection" AS ENUM ('PENDING', 'ACCEPTED', 'REJECTED', 'CLOSED');
 
 -- CreateEnum
 CREATE TYPE "OpportunityType" AS ENUM ('COURSE', 'EVENT', 'SCHOLARSHIP', 'JOB');
@@ -45,7 +45,7 @@ CREATE TABLE "connections" (
     "id" TEXT NOT NULL,
     "requester_id" TEXT NOT NULL,
     "receiver_id" TEXT NOT NULL,
-    "field_id" TEXT NOT NULL,
+    "area_id" TEXT NOT NULL,
     "status" "StatusConnection" NOT NULL DEFAULT 'PENDING',
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
@@ -121,7 +121,7 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 CREATE UNIQUE INDEX "tech_areas_name_key" ON "tech_areas"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "connections_requester_id_receiver_id_field_id_key" ON "connections"("requester_id", "receiver_id", "field_id");
+CREATE UNIQUE INDEX "connections_requester_id_receiver_id_area_id_key" ON "connections"("requester_id", "receiver_id", "area_id");
 
 -- AddForeignKey
 ALTER TABLE "users_areas" ADD CONSTRAINT "users_areas_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -136,7 +136,7 @@ ALTER TABLE "connections" ADD CONSTRAINT "connections_requester_id_fkey" FOREIGN
 ALTER TABLE "connections" ADD CONSTRAINT "connections_receiver_id_fkey" FOREIGN KEY ("receiver_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "connections" ADD CONSTRAINT "connections_field_id_fkey" FOREIGN KEY ("field_id") REFERENCES "tech_areas"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "connections" ADD CONSTRAINT "connections_area_id_fkey" FOREIGN KEY ("area_id") REFERENCES "tech_areas"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "inspirations_areas" ADD CONSTRAINT "inspirations_areas_inspiration_id_fkey" FOREIGN KEY ("inspiration_id") REFERENCES "inspirations"("id") ON DELETE CASCADE ON UPDATE CASCADE;

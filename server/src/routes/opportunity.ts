@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { getAllOpportunities, getOpportunitiesByArea } from "../controllers/opportunityController";
+import { createOpportunity, getAllOpportunities, getOpportunitiesByArea } from "../controllers/opportunityController";
+import { authenticateToken, requireAdmin } from "../middleware/auth";
 const opportunityRoutes = Router();
 
-opportunityRoutes.get('/', getAllOpportunities);
-opportunityRoutes.get('/area/:areaId', getOpportunitiesByArea);
+opportunityRoutes.get('/', authenticateToken, getAllOpportunities);
+opportunityRoutes.get('/area/:areaId', authenticateToken, getOpportunitiesByArea);
+opportunityRoutes.post('/', authenticateToken, requireAdmin, createOpportunity);
 
 export default opportunityRoutes;

@@ -23,22 +23,21 @@ export const register = async (req: Request, res: Response) => {
             return res.status(400).json({ message: 'Email inválido' });
         }
 
-        if (areas.length === 0 && role === Role.GUIDE) {
+        if(role !== Role.STUDENT && role !== Role.GUIDE) {
+            return res.status(400).json({ message: 'Role inválida. Valores permitidos: STUDENT, GUIDE' });
+        }
+
+        if(areas !== undefined && !Array.isArray(areas)) {
+            return res.status(400).json({ message: 'Áreas inválidas' });
+        }
+
+        if (areas && areas.length === 0 && role === Role.GUIDE) {
             return res.status(400).json({ message: 'Guias devem selecionar pelo menos uma área de interesse' });
         }
 
         const userData: IUserCreate = { name, username, email, password, image, description, role, areas };
 
-        const user = await prisma.$transaction(async (prisma) => {
-            const newUser = await User.create(userData);
-
-            if (areas.length > 0) {
-                for (const areaId of areas) {
-                    await Area.createUserArea(newUser.id, areaId);
-                }
-            }
-            return newUser;
-        });
+        const user = await User.create(userData);
         
         const token = generateToken(user.id);
 

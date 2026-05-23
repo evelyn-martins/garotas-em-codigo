@@ -116,7 +116,7 @@ export const ConnectionScalarFieldEnum = {
   id: 'id',
   requesterId: 'requesterId',
   receiverId: 'receiverId',
-  fieldId: 'fieldId',
+  areaId: 'areaId',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

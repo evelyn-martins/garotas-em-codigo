@@ -12,7 +12,7 @@
 export const StatusConnection = {
   PENDING: 'PENDING',
   ACCEPTED: 'ACCEPTED',
-  ACTIVE: 'ACTIVE',
+  REJECTED: 'REJECTED',
   CLOSED: 'CLOSED'
 } as const
 

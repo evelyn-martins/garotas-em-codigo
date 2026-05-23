@@ -28,7 +28,7 @@ export type ConnectionMinAggregateOutputType = {
   id: string | null
   requesterId: string | null
   receiverId: string | null
-  fieldId: string | null
+  areaId: string | null
   status: $Enums.StatusConnection | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -38,7 +38,7 @@ export type ConnectionMaxAggregateOutputType = {
   id: string | null
   requesterId: string | null
   receiverId: string | null
-  fieldId: string | null
+  areaId: string | null
   status: $Enums.StatusConnection | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -48,7 +48,7 @@ export type ConnectionCountAggregateOutputType = {
   id: number
   requesterId: number
   receiverId: number
-  fieldId: number
+  areaId: number
   status: number
   createdAt: number
   updatedAt: number
@@ -60,7 +60,7 @@ export type ConnectionMinAggregateInputType = {
   id?: true
   requesterId?: true
   receiverId?: true
-  fieldId?: true
+  areaId?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -70,7 +70,7 @@ export type ConnectionMaxAggregateInputType = {
   id?: true
   requesterId?: true
   receiverId?: true
-  fieldId?: true
+  areaId?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -80,7 +80,7 @@ export type ConnectionCountAggregateInputType = {
   id?: true
   requesterId?: true
   receiverId?: true
-  fieldId?: true
+  areaId?: true
   status?: true
   createdAt?: true
   updatedAt?: true
@@ -163,7 +163,7 @@ export type ConnectionGroupByOutputType = {
   id: string
   requesterId: string
   receiverId: string
-  fieldId: string
+  areaId: string
   status: $Enums.StatusConnection
   createdAt: Date
   updatedAt: Date
@@ -194,7 +194,7 @@ export type ConnectionWhereInput = {
   id?: Prisma.StringFilter<"Connection"> | string
   requesterId?: Prisma.StringFilter<"Connection"> | string
   receiverId?: Prisma.StringFilter<"Connection"> | string
-  fieldId?: Prisma.StringFilter<"Connection"> | string
+  areaId?: Prisma.StringFilter<"Connection"> | string
   status?: Prisma.EnumStatusConnectionFilter<"Connection"> | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFilter<"Connection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Connection"> | Date | string
@@ -207,7 +207,7 @@ export type ConnectionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
   receiverId?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
+  areaId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -218,26 +218,26 @@ export type ConnectionOrderByWithRelationInput = {
 
 export type ConnectionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  requesterId_receiverId_fieldId?: Prisma.ConnectionRequesterIdReceiverIdFieldIdCompoundUniqueInput
+  requesterId_receiverId_areaId?: Prisma.ConnectionRequesterIdReceiverIdAreaIdCompoundUniqueInput
   AND?: Prisma.ConnectionWhereInput | Prisma.ConnectionWhereInput[]
   OR?: Prisma.ConnectionWhereInput[]
   NOT?: Prisma.ConnectionWhereInput | Prisma.ConnectionWhereInput[]
   requesterId?: Prisma.StringFilter<"Connection"> | string
   receiverId?: Prisma.StringFilter<"Connection"> | string
-  fieldId?: Prisma.StringFilter<"Connection"> | string
+  areaId?: Prisma.StringFilter<"Connection"> | string
   status?: Prisma.EnumStatusConnectionFilter<"Connection"> | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFilter<"Connection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Connection"> | Date | string
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   receiver?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   area?: Prisma.XOR<Prisma.TechAreaScalarRelationFilter, Prisma.TechAreaWhereInput>
-}, "id" | "requesterId_receiverId_fieldId">
+}, "id" | "requesterId_receiverId_areaId">
 
 export type ConnectionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
   receiverId?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
+  areaId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -253,7 +253,7 @@ export type ConnectionScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Connection"> | string
   requesterId?: Prisma.StringWithAggregatesFilter<"Connection"> | string
   receiverId?: Prisma.StringWithAggregatesFilter<"Connection"> | string
-  fieldId?: Prisma.StringWithAggregatesFilter<"Connection"> | string
+  areaId?: Prisma.StringWithAggregatesFilter<"Connection"> | string
   status?: Prisma.EnumStatusConnectionWithAggregatesFilter<"Connection"> | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Connection"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Connection"> | Date | string
@@ -273,7 +273,7 @@ export type ConnectionUncheckedCreateInput = {
   id?: string
   requesterId: string
   receiverId: string
-  fieldId: string
+  areaId: string
   status?: $Enums.StatusConnection
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -293,7 +293,7 @@ export type ConnectionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   receiverId?: Prisma.StringFieldUpdateOperationsInput | string
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
+  areaId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -303,7 +303,7 @@ export type ConnectionCreateManyInput = {
   id?: string
   requesterId: string
   receiverId: string
-  fieldId: string
+  areaId: string
   status?: $Enums.StatusConnection
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -320,7 +320,7 @@ export type ConnectionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   receiverId?: Prisma.StringFieldUpdateOperationsInput | string
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
+  areaId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -336,17 +336,17 @@ export type ConnectionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type ConnectionRequesterIdReceiverIdFieldIdCompoundUniqueInput = {
+export type ConnectionRequesterIdReceiverIdAreaIdCompoundUniqueInput = {
   requesterId: string
   receiverId: string
-  fieldId: string
+  areaId: string
 }
 
 export type ConnectionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
   receiverId?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
+  areaId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -356,7 +356,7 @@ export type ConnectionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
   receiverId?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
+  areaId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -366,7 +366,7 @@ export type ConnectionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
   receiverId?: Prisma.SortOrder
-  fieldId?: Prisma.SortOrder
+  areaId?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -514,7 +514,7 @@ export type ConnectionCreateWithoutRequesterInput = {
 export type ConnectionUncheckedCreateWithoutRequesterInput = {
   id?: string
   receiverId: string
-  fieldId: string
+  areaId: string
   status?: $Enums.StatusConnection
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -542,7 +542,7 @@ export type ConnectionCreateWithoutReceiverInput = {
 export type ConnectionUncheckedCreateWithoutReceiverInput = {
   id?: string
   requesterId: string
-  fieldId: string
+  areaId: string
   status?: $Enums.StatusConnection
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -581,7 +581,7 @@ export type ConnectionScalarWhereInput = {
   id?: Prisma.StringFilter<"Connection"> | string
   requesterId?: Prisma.StringFilter<"Connection"> | string
   receiverId?: Prisma.StringFilter<"Connection"> | string
-  fieldId?: Prisma.StringFilter<"Connection"> | string
+  areaId?: Prisma.StringFilter<"Connection"> | string
   status?: Prisma.EnumStatusConnectionFilter<"Connection"> | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFilter<"Connection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Connection"> | Date | string
@@ -650,7 +650,7 @@ export type ConnectionUpdateManyWithWhereWithoutAreaInput = {
 export type ConnectionCreateManyRequesterInput = {
   id?: string
   receiverId: string
-  fieldId: string
+  areaId: string
   status?: $Enums.StatusConnection
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -659,7 +659,7 @@ export type ConnectionCreateManyRequesterInput = {
 export type ConnectionCreateManyReceiverInput = {
   id?: string
   requesterId: string
-  fieldId: string
+  areaId: string
   status?: $Enums.StatusConnection
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -677,7 +677,7 @@ export type ConnectionUpdateWithoutRequesterInput = {
 export type ConnectionUncheckedUpdateWithoutRequesterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   receiverId?: Prisma.StringFieldUpdateOperationsInput | string
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
+  areaId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -686,7 +686,7 @@ export type ConnectionUncheckedUpdateWithoutRequesterInput = {
 export type ConnectionUncheckedUpdateManyWithoutRequesterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   receiverId?: Prisma.StringFieldUpdateOperationsInput | string
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
+  areaId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -704,7 +704,7 @@ export type ConnectionUpdateWithoutReceiverInput = {
 export type ConnectionUncheckedUpdateWithoutReceiverInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
+  areaId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -713,7 +713,7 @@ export type ConnectionUncheckedUpdateWithoutReceiverInput = {
 export type ConnectionUncheckedUpdateManyWithoutReceiverInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
-  fieldId?: Prisma.StringFieldUpdateOperationsInput | string
+  areaId?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -761,7 +761,7 @@ export type ConnectionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   requesterId?: boolean
   receiverId?: boolean
-  fieldId?: boolean
+  areaId?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -774,7 +774,7 @@ export type ConnectionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   requesterId?: boolean
   receiverId?: boolean
-  fieldId?: boolean
+  areaId?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -787,7 +787,7 @@ export type ConnectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   id?: boolean
   requesterId?: boolean
   receiverId?: boolean
-  fieldId?: boolean
+  areaId?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -800,13 +800,13 @@ export type ConnectionSelectScalar = {
   id?: boolean
   requesterId?: boolean
   receiverId?: boolean
-  fieldId?: boolean
+  areaId?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ConnectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "requesterId" | "receiverId" | "fieldId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["connection"]>
+export type ConnectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "requesterId" | "receiverId" | "areaId" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["connection"]>
 export type ConnectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   receiver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -834,7 +834,7 @@ export type $ConnectionPayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: string
     requesterId: string
     receiverId: string
-    fieldId: string
+    areaId: string
     status: $Enums.StatusConnection
     createdAt: Date
     updatedAt: Date
@@ -1267,7 +1267,7 @@ export interface ConnectionFieldRefs {
   readonly id: Prisma.FieldRef<"Connection", 'String'>
   readonly requesterId: Prisma.FieldRef<"Connection", 'String'>
   readonly receiverId: Prisma.FieldRef<"Connection", 'String'>
-  readonly fieldId: Prisma.FieldRef<"Connection", 'String'>
+  readonly areaId: Prisma.FieldRef<"Connection", 'String'>
   readonly status: Prisma.FieldRef<"Connection", 'StatusConnection'>
   readonly createdAt: Prisma.FieldRef<"Connection", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Connection", 'DateTime'>

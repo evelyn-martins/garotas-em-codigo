@@ -65,18 +65,30 @@ export class User {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(userData.password, saltRounds);
 
-        const newUser = await prisma.user.create({
-            data: {
-                name: userData.name,
-                username: userData.username,
-                email: userData.email,
-                password: hashedPassword,
-                image: userData.image || null,
-                description: userData.description || null,
-                role: userData.role,
+        return await prisma.$transaction(async (prisma) => {
+            const newUser = await prisma.user.create({
+                data: {
+                    name: userData.name,
+                    username: userData.username,
+                    email: userData.email,
+                    password: hashedPassword,
+                    image: userData.image || null,
+                    description: userData.description || null,
+                    role: userData.role,
+                }
+            });
+            if (userData.areas && userData.areas.length > 0) {
+                for (const areaId of userData.areas) {
+                    await prisma.userArea.create({
+                        data: {
+                            userId: newUser.id,
+                            areaId
+                        }
+                    });
+                }
             }
+            return newUser;
         });
-        return newUser;
     }
     static async findByEmail(email: string): Promise<IUser | null> {
         const user = await prisma.user.findUnique({

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Response, Request, NextFunction } from "express";
 import { User } from "../models/User";
+import { Role } from "../../generated/prisma/enums";
 
 export const authenticateToken = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -24,6 +25,7 @@ export const authenticateToken = async (req: Request, res: Response, next: NextF
             name: user.name,
             email: user.email,
             username: user.username,
+            role: user.role,
         }
         return next();
     } catch (error) {
@@ -41,3 +43,15 @@ export const generateToken = (userId: string): string => {
 
     return jwt.sign({ userId }, jwtSecret, { expiresIn: Number(jwtExpiresIn) });
 }
+
+export const requireAdmin = (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user) {
+        return res.status(401).json({ message: 'Usuário não autenticado' });
+    }
+
+    if (req.user.role !== Role.ADMIN) {
+        return res.status(403).json({ message: 'Acesso negado: apenas administradores' });
+    }
+
+    return next();
+};

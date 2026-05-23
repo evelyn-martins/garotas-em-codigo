@@ -10,7 +10,7 @@ datasource db {
 enum StatusConnection {
   PENDING
   ACCEPTED
-  ACTIVE
+  REJECTED
   CLOSED
 }
 
@@ -78,16 +78,16 @@ model Connection {
   id          String           @id @default(uuid())
   requesterId String           @map("requester_id")
   receiverId  String           @map("receiver_id")
-  fieldId     String           @map("field_id")
+  areaId      String           @map("area_id")
   status      StatusConnection @default(PENDING)
   createdAt   DateTime         @default(now()) @map("created_at")
   updatedAt   DateTime         @updatedAt @map("updated_at")
 
   requester   User     @relation("Requester", fields: [requesterId], references: [id], onDelete: Cascade)
   receiver    User     @relation("Receiver",  fields: [receiverId],  references: [id], onDelete: Cascade)
-  area        TechArea @relation(fields: [fieldId], references: [id], onDelete: Cascade)
+  area        TechArea @relation(fields: [areaId], references: [id], onDelete: Cascade)
 
-  @@unique([requesterId, receiverId, fieldId])
+  @@unique([requesterId, receiverId, areaId])
   @@map("connections")
 }
 
