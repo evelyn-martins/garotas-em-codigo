@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { createPost, deletePost, getPostById, getPostsByUser, updatePost, getPostLikes } from "../controllers/postController";
+import { createPost, deletePost, getPostById, getPostsByUser, updatePost, getPostLikes, getAllPosts } from "../controllers/postController";
 import { likePost, unlikePost } from "../controllers/likeController";
 import { authenticateToken } from "../middleware/auth";
 
 const postRoutes = Router();
 
+postRoutes.get('/', authenticateToken, getAllPosts);
 postRoutes.get('/user/:userId', authenticateToken, getPostsByUser);
 postRoutes.post('/create', authenticateToken, createPost);
 postRoutes.put('/update/:postId', authenticateToken, updatePost);

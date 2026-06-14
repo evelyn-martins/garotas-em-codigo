@@ -22,6 +22,14 @@ export interface IUserCreate {
     areas: string[];
 }
 
+export interface IUserUpdate {
+    name?: string;
+    username?: string;
+    email?: string;
+    image?: File | null;
+    description?: string | null;
+}
+
 export interface IUserCreateErros {
     name?: string;
     username?: string;

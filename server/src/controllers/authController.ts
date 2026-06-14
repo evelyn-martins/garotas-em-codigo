@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 import { User } from '../models/User';
-import { Area } from '../models/Area';
 import { IUserCreate } from '../models/User';
 import { generateToken } from '../middleware/auth';
-import { prisma } from '../config/prisma';
 import { Role } from '../../generated/prisma/client';
 
 export const register = async (req: Request, res: Response) => {

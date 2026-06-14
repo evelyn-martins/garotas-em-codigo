@@ -60,4 +60,13 @@ export class Post {
         });
         return likeCount;
     }
+
+    static async findAll() {
+        return await prisma.post.findMany({
+            orderBy: { createdAt: 'desc' },
+            include: {
+                user: { select: { id: true, name: true, username: true, image: true } },
+            },
+        });
+    }
 }

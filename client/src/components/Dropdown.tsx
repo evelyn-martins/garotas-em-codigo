@@ -114,7 +114,7 @@ export default function Dropdown({
                         <button
                             key={option.value}
                             type="button"
-                            onClick={() => handleSelect(option.value)}
+                            onClick={() => onChange(values.filter(v => v !== option.value))}
                             className={`cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition hover:brightness-95 ${isDark
                                 ? "border border-action-primary/40 bg-bg-primary text-color-logo"
                                 : "bg-bg-primary text-color-logo"

@@ -34,3 +34,5 @@ Thumbs.db
 # Tool caches
 .vite/
 coverage/
+
+CLAUDE.md

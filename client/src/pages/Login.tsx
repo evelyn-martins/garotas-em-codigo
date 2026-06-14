@@ -71,7 +71,7 @@ export default function Login() {
         }
         setTimeout(() => {
             setLoading(false);
-            navigate("/");
+            navigate("/dashboard");
         }, 1000);
     };
 

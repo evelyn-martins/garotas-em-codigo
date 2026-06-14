@@ -91,6 +91,15 @@ export const getPostById = async (req: Request, res: Response) => {
     }
 }
 
+export const getAllPosts = async (_req: Request, res: Response) => {
+    try {
+        const posts = await Post.findAll();
+        return res.status(200).json(posts);
+    } catch {
+        return res.status(500).json({ message: 'Erro interno do servidor' });
+    }
+}
+
 export const getPostLikes = async (req: Request, res: Response) => {
     try {
         const {postId} = req.params;

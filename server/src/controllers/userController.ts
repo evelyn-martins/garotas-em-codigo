@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { IUserCreate, User } from "../models/User";
+import { IUserCreate, IUserUpdate, User } from "../models/User";
 
 export const updateProfile = async (req: Request, res: Response) => {
     try {
         if (!req.user) {
             return res.status(401).json({ message: 'Usuário não autenticado' });
         }
-        const { name, email, username, image, description } = req.body;
+        const { name, email, username, description } = req.body;
         const userId = req.user.id;
 
         if (email) {
@@ -16,7 +16,13 @@ export const updateProfile = async (req: Request, res: Response) => {
             }
         }
 
-        const updateData: Partial<IUserCreate> = { name, email, username, image, description};
+        const updateData: Partial<IUserUpdate> = { name, email, username };
+        if (req.file) {
+            updateData.image = req.file.path;
+        }
+        if (description !== undefined) {
+            updateData.description = description;
+        }
         const updatedUser = await User.updateProfile(userId, updateData);
         const publicUser = User.toPublic(updatedUser);
 
@@ -44,24 +50,24 @@ export const getProfile = async (req: Request, res: Response) => {
         }
         const publicUser = User.toPublic(user);
         return res.status(200).json({ user: publicUser });
-    }catch(error){
+    } catch (error) {
         return res.status(500).json({ message: 'Erro interno do servidor' });
     }
 }
 
 export const changePassword = async (req: Request, res: Response) => {
-    try{
+    try {
         if (!req.user) {
             return res.status(401).json({ message: 'Usuário não autenticado' });
         }
         const { oldPassword, newPassword } = req.body;
-        if( !oldPassword || !newPassword) {
+        if (!oldPassword || !newPassword) {
             return res.status(400).json({ message: 'Senha atual e nova senha são obrigatórias' });
         }
-        if(oldPassword === newPassword) {
+        if (oldPassword === newPassword) {
             return res.status(400).json({ message: 'A nova senha deve ser diferente da senha atual' });
         }
-        if( newPassword.length < 6) {
+        if (newPassword.length < 6) {
             return res.status(400).json({ message: 'A nova senha deve conter pelo menos 6 caracteres' });
         }
         const userId = req.user.id;
@@ -75,7 +81,7 @@ export const changePassword = async (req: Request, res: Response) => {
         }
         await User.changePassword(userId, newPassword);
         return res.status(200).json({ message: 'Senha alterada com sucesso' });
-    }catch(error){
+    } catch (error) {
         return res.status(500).json({ message: 'Erro interno do servidor' });
     }
 }

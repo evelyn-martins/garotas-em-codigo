@@ -50,4 +50,13 @@ export class Connection {
         });
         return connection;
     }
+
+    static async isParticipant(connectionId: string, userId: string): Promise<boolean> {
+        const connection = await prisma.connection.findUnique({
+            where: { id: connectionId },
+            select: { requesterId: true, receiverId: true },
+        });
+        if (!connection) return false;
+        return connection.requesterId === userId || connection.receiverId === userId;
+    }
 }

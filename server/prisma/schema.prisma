@@ -45,8 +45,25 @@ model User {
   receivedConnections  Connection[] @relation("Receiver")
   posts                Post[]
   likes                Like[]
+  sentMessages         Message[]    @relation("Sender")
+  receivedMessages     Message[]    @relation("Receiver")
 
   @@map("users")
+}
+
+model Message {
+  id           String     @id @default(uuid())
+  content      String
+  senderId     String     @map("sender_id")
+  receiverId   String     @map("receiver_id")
+  connectionId String     @map("connection_id")
+  createdAt    DateTime   @default(now()) @map("created_at")
+
+  sender       User       @relation("Sender",   fields: [senderId],     references: [id], onDelete: Cascade)
+  receiver     User       @relation("Receiver", fields: [receiverId],   references: [id], onDelete: Cascade)
+  connection   Connection @relation(fields: [connectionId], references: [id], onDelete: Cascade)
+
+  @@map("messages")
 }
 
 model TechArea {
@@ -83,9 +100,10 @@ model Connection {
   createdAt   DateTime         @default(now()) @map("created_at")
   updatedAt   DateTime         @updatedAt @map("updated_at")
 
-  requester   User     @relation("Requester", fields: [requesterId], references: [id], onDelete: Cascade)
-  receiver    User     @relation("Receiver",  fields: [receiverId],  references: [id], onDelete: Cascade)
-  area        TechArea @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  requester   User      @relation("Requester", fields: [requesterId], references: [id], onDelete: Cascade)
+  receiver    User      @relation("Receiver",  fields: [receiverId],  references: [id], onDelete: Cascade)
+  area        TechArea  @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  messages    Message[]
 
   @@unique([requesterId, receiverId, areaId])
   @@map("connections")

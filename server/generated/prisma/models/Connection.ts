@@ -201,6 +201,7 @@ export type ConnectionWhereInput = {
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   receiver?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   area?: Prisma.XOR<Prisma.TechAreaScalarRelationFilter, Prisma.TechAreaWhereInput>
+  messages?: Prisma.MessageListRelationFilter
 }
 
 export type ConnectionOrderByWithRelationInput = {
@@ -214,6 +215,7 @@ export type ConnectionOrderByWithRelationInput = {
   requester?: Prisma.UserOrderByWithRelationInput
   receiver?: Prisma.UserOrderByWithRelationInput
   area?: Prisma.TechAreaOrderByWithRelationInput
+  messages?: Prisma.MessageOrderByRelationAggregateInput
 }
 
 export type ConnectionWhereUniqueInput = Prisma.AtLeast<{
@@ -231,6 +233,7 @@ export type ConnectionWhereUniqueInput = Prisma.AtLeast<{
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   receiver?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   area?: Prisma.XOR<Prisma.TechAreaScalarRelationFilter, Prisma.TechAreaWhereInput>
+  messages?: Prisma.MessageListRelationFilter
 }, "id" | "requesterId_receiverId_areaId">
 
 export type ConnectionOrderByWithAggregationInput = {
@@ -267,6 +270,7 @@ export type ConnectionCreateInput = {
   requester: Prisma.UserCreateNestedOneWithoutRequestedConnectionsInput
   receiver: Prisma.UserCreateNestedOneWithoutReceivedConnectionsInput
   area: Prisma.TechAreaCreateNestedOneWithoutConnectionsInput
+  messages?: Prisma.MessageCreateNestedManyWithoutConnectionInput
 }
 
 export type ConnectionUncheckedCreateInput = {
@@ -277,6 +281,7 @@ export type ConnectionUncheckedCreateInput = {
   status?: $Enums.StatusConnection
   createdAt?: Date | string
   updatedAt?: Date | string
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConnectionInput
 }
 
 export type ConnectionUpdateInput = {
@@ -287,6 +292,7 @@ export type ConnectionUpdateInput = {
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestedConnectionsNestedInput
   receiver?: Prisma.UserUpdateOneRequiredWithoutReceivedConnectionsNestedInput
   area?: Prisma.TechAreaUpdateOneRequiredWithoutConnectionsNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutConnectionNestedInput
 }
 
 export type ConnectionUncheckedUpdateInput = {
@@ -297,6 +303,7 @@ export type ConnectionUncheckedUpdateInput = {
   status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutConnectionNestedInput
 }
 
 export type ConnectionCreateManyInput = {
@@ -334,6 +341,11 @@ export type ConnectionListRelationFilter = {
 
 export type ConnectionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ConnectionScalarRelationFilter = {
+  is?: Prisma.ConnectionWhereInput
+  isNot?: Prisma.ConnectionWhereInput
 }
 
 export type ConnectionRequesterIdReceiverIdAreaIdCompoundUniqueInput = {
@@ -456,6 +468,20 @@ export type ConnectionUncheckedUpdateManyWithoutReceiverNestedInput = {
   deleteMany?: Prisma.ConnectionScalarWhereInput | Prisma.ConnectionScalarWhereInput[]
 }
 
+export type ConnectionCreateNestedOneWithoutMessagesInput = {
+  create?: Prisma.XOR<Prisma.ConnectionCreateWithoutMessagesInput, Prisma.ConnectionUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.ConnectionCreateOrConnectWithoutMessagesInput
+  connect?: Prisma.ConnectionWhereUniqueInput
+}
+
+export type ConnectionUpdateOneRequiredWithoutMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.ConnectionCreateWithoutMessagesInput, Prisma.ConnectionUncheckedCreateWithoutMessagesInput>
+  connectOrCreate?: Prisma.ConnectionCreateOrConnectWithoutMessagesInput
+  upsert?: Prisma.ConnectionUpsertWithoutMessagesInput
+  connect?: Prisma.ConnectionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ConnectionUpdateToOneWithWhereWithoutMessagesInput, Prisma.ConnectionUpdateWithoutMessagesInput>, Prisma.ConnectionUncheckedUpdateWithoutMessagesInput>
+}
+
 export type ConnectionCreateNestedManyWithoutAreaInput = {
   create?: Prisma.XOR<Prisma.ConnectionCreateWithoutAreaInput, Prisma.ConnectionUncheckedCreateWithoutAreaInput> | Prisma.ConnectionCreateWithoutAreaInput[] | Prisma.ConnectionUncheckedCreateWithoutAreaInput[]
   connectOrCreate?: Prisma.ConnectionCreateOrConnectWithoutAreaInput | Prisma.ConnectionCreateOrConnectWithoutAreaInput[]
@@ -509,6 +535,7 @@ export type ConnectionCreateWithoutRequesterInput = {
   updatedAt?: Date | string
   receiver: Prisma.UserCreateNestedOneWithoutReceivedConnectionsInput
   area: Prisma.TechAreaCreateNestedOneWithoutConnectionsInput
+  messages?: Prisma.MessageCreateNestedManyWithoutConnectionInput
 }
 
 export type ConnectionUncheckedCreateWithoutRequesterInput = {
@@ -518,6 +545,7 @@ export type ConnectionUncheckedCreateWithoutRequesterInput = {
   status?: $Enums.StatusConnection
   createdAt?: Date | string
   updatedAt?: Date | string
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConnectionInput
 }
 
 export type ConnectionCreateOrConnectWithoutRequesterInput = {
@@ -537,6 +565,7 @@ export type ConnectionCreateWithoutReceiverInput = {
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutRequestedConnectionsInput
   area: Prisma.TechAreaCreateNestedOneWithoutConnectionsInput
+  messages?: Prisma.MessageCreateNestedManyWithoutConnectionInput
 }
 
 export type ConnectionUncheckedCreateWithoutReceiverInput = {
@@ -546,6 +575,7 @@ export type ConnectionUncheckedCreateWithoutReceiverInput = {
   status?: $Enums.StatusConnection
   createdAt?: Date | string
   updatedAt?: Date | string
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConnectionInput
 }
 
 export type ConnectionCreateOrConnectWithoutReceiverInput = {
@@ -603,6 +633,62 @@ export type ConnectionUpdateManyWithWhereWithoutReceiverInput = {
   data: Prisma.XOR<Prisma.ConnectionUpdateManyMutationInput, Prisma.ConnectionUncheckedUpdateManyWithoutReceiverInput>
 }
 
+export type ConnectionCreateWithoutMessagesInput = {
+  id?: string
+  status?: $Enums.StatusConnection
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  requester: Prisma.UserCreateNestedOneWithoutRequestedConnectionsInput
+  receiver: Prisma.UserCreateNestedOneWithoutReceivedConnectionsInput
+  area: Prisma.TechAreaCreateNestedOneWithoutConnectionsInput
+}
+
+export type ConnectionUncheckedCreateWithoutMessagesInput = {
+  id?: string
+  requesterId: string
+  receiverId: string
+  areaId: string
+  status?: $Enums.StatusConnection
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ConnectionCreateOrConnectWithoutMessagesInput = {
+  where: Prisma.ConnectionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ConnectionCreateWithoutMessagesInput, Prisma.ConnectionUncheckedCreateWithoutMessagesInput>
+}
+
+export type ConnectionUpsertWithoutMessagesInput = {
+  update: Prisma.XOR<Prisma.ConnectionUpdateWithoutMessagesInput, Prisma.ConnectionUncheckedUpdateWithoutMessagesInput>
+  create: Prisma.XOR<Prisma.ConnectionCreateWithoutMessagesInput, Prisma.ConnectionUncheckedCreateWithoutMessagesInput>
+  where?: Prisma.ConnectionWhereInput
+}
+
+export type ConnectionUpdateToOneWithWhereWithoutMessagesInput = {
+  where?: Prisma.ConnectionWhereInput
+  data: Prisma.XOR<Prisma.ConnectionUpdateWithoutMessagesInput, Prisma.ConnectionUncheckedUpdateWithoutMessagesInput>
+}
+
+export type ConnectionUpdateWithoutMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requester?: Prisma.UserUpdateOneRequiredWithoutRequestedConnectionsNestedInput
+  receiver?: Prisma.UserUpdateOneRequiredWithoutReceivedConnectionsNestedInput
+  area?: Prisma.TechAreaUpdateOneRequiredWithoutConnectionsNestedInput
+}
+
+export type ConnectionUncheckedUpdateWithoutMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  receiverId?: Prisma.StringFieldUpdateOperationsInput | string
+  areaId?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type ConnectionCreateWithoutAreaInput = {
   id?: string
   status?: $Enums.StatusConnection
@@ -610,6 +696,7 @@ export type ConnectionCreateWithoutAreaInput = {
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutRequestedConnectionsInput
   receiver: Prisma.UserCreateNestedOneWithoutReceivedConnectionsInput
+  messages?: Prisma.MessageCreateNestedManyWithoutConnectionInput
 }
 
 export type ConnectionUncheckedCreateWithoutAreaInput = {
@@ -619,6 +706,7 @@ export type ConnectionUncheckedCreateWithoutAreaInput = {
   status?: $Enums.StatusConnection
   createdAt?: Date | string
   updatedAt?: Date | string
+  messages?: Prisma.MessageUncheckedCreateNestedManyWithoutConnectionInput
 }
 
 export type ConnectionCreateOrConnectWithoutAreaInput = {
@@ -672,6 +760,7 @@ export type ConnectionUpdateWithoutRequesterInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   receiver?: Prisma.UserUpdateOneRequiredWithoutReceivedConnectionsNestedInput
   area?: Prisma.TechAreaUpdateOneRequiredWithoutConnectionsNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutConnectionNestedInput
 }
 
 export type ConnectionUncheckedUpdateWithoutRequesterInput = {
@@ -681,6 +770,7 @@ export type ConnectionUncheckedUpdateWithoutRequesterInput = {
   status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutConnectionNestedInput
 }
 
 export type ConnectionUncheckedUpdateManyWithoutRequesterInput = {
@@ -699,6 +789,7 @@ export type ConnectionUpdateWithoutReceiverInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestedConnectionsNestedInput
   area?: Prisma.TechAreaUpdateOneRequiredWithoutConnectionsNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutConnectionNestedInput
 }
 
 export type ConnectionUncheckedUpdateWithoutReceiverInput = {
@@ -708,6 +799,7 @@ export type ConnectionUncheckedUpdateWithoutReceiverInput = {
   status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutConnectionNestedInput
 }
 
 export type ConnectionUncheckedUpdateManyWithoutReceiverInput = {
@@ -735,6 +827,7 @@ export type ConnectionUpdateWithoutAreaInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestedConnectionsNestedInput
   receiver?: Prisma.UserUpdateOneRequiredWithoutReceivedConnectionsNestedInput
+  messages?: Prisma.MessageUpdateManyWithoutConnectionNestedInput
 }
 
 export type ConnectionUncheckedUpdateWithoutAreaInput = {
@@ -744,6 +837,7 @@ export type ConnectionUncheckedUpdateWithoutAreaInput = {
   status?: Prisma.EnumStatusConnectionFieldUpdateOperationsInput | $Enums.StatusConnection
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  messages?: Prisma.MessageUncheckedUpdateManyWithoutConnectionNestedInput
 }
 
 export type ConnectionUncheckedUpdateManyWithoutAreaInput = {
@@ -755,6 +849,35 @@ export type ConnectionUncheckedUpdateManyWithoutAreaInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type ConnectionCountOutputType
+ */
+
+export type ConnectionCountOutputType = {
+  messages: number
+}
+
+export type ConnectionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  messages?: boolean | ConnectionCountOutputTypeCountMessagesArgs
+}
+
+/**
+ * ConnectionCountOutputType without action
+ */
+export type ConnectionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ConnectionCountOutputType
+   */
+  select?: Prisma.ConnectionCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ConnectionCountOutputType without action
+ */
+export type ConnectionCountOutputTypeCountMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageWhereInput
+}
 
 
 export type ConnectionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -768,6 +891,8 @@ export type ConnectionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   receiver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   area?: boolean | Prisma.TechAreaDefaultArgs<ExtArgs>
+  messages?: boolean | Prisma.Connection$messagesArgs<ExtArgs>
+  _count?: boolean | Prisma.ConnectionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["connection"]>
 
 export type ConnectionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -811,6 +936,8 @@ export type ConnectionInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   receiver?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   area?: boolean | Prisma.TechAreaDefaultArgs<ExtArgs>
+  messages?: boolean | Prisma.Connection$messagesArgs<ExtArgs>
+  _count?: boolean | Prisma.ConnectionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ConnectionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -829,6 +956,7 @@ export type $ConnectionPayload<ExtArgs extends runtime.Types.Extensions.Internal
     requester: Prisma.$UserPayload<ExtArgs>
     receiver: Prisma.$UserPayload<ExtArgs>
     area: Prisma.$TechAreaPayload<ExtArgs>
+    messages: Prisma.$MessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1235,6 +1363,7 @@ export interface Prisma__ConnectionClient<T, Null = never, ExtArgs extends runti
   requester<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   receiver<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   area<T extends Prisma.TechAreaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TechAreaDefaultArgs<ExtArgs>>): Prisma.Prisma__TechAreaClient<runtime.Types.Result.GetResult<Prisma.$TechAreaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  messages<T extends Prisma.Connection$messagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Connection$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1669,6 +1798,30 @@ export type ConnectionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Connections to delete.
    */
   limit?: number
+}
+
+/**
+ * Connection.messages
+ */
+export type Connection$messagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Message
+   */
+  select?: Prisma.MessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Message
+   */
+  omit?: Prisma.MessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessageInclude<ExtArgs> | null
+  where?: Prisma.MessageWhereInput
+  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
+  cursor?: Prisma.MessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
 }
 
 /**
