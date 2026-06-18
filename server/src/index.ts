@@ -7,14 +7,18 @@ import userRoutes from './routes/user';
 import areaRoutes from './routes/area';
 import opportunityRoutes from './routes/opportunity';
 import inspirationRoutes from './routes/inspiration';
-import messageRoutes from './routes/messageRoutes';
+import messageRoutes from './routes/message';
+import connectionRoutes from './routes/connection';
 import { setupSocket } from './socket';
 
 const app = express();
 const httpServer = createServer(app);
 const PORT = 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -29,6 +33,7 @@ app.use('/api/areas', areaRoutes);
 app.use('/api/opportunities', opportunityRoutes);
 app.use('/api/inspirations', inspirationRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/api/connections', connectionRoutes);
 
 setupSocket(httpServer);
 

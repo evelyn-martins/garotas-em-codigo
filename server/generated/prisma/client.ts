@@ -72,11 +72,6 @@ export type Connection = Prisma.ConnectionModel
  */
 export type Inspiration = Prisma.InspirationModel
 /**
- * Model InspirationArea
- * 
- */
-export type InspirationArea = Prisma.InspirationAreaModel
-/**
  * Model Opportunity
  * 
  */

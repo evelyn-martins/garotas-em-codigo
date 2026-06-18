@@ -390,7 +390,6 @@ export const ModelName = {
   UserArea: 'UserArea',
   Connection: 'Connection',
   Inspiration: 'Inspiration',
-  InspirationArea: 'InspirationArea',
   Opportunity: 'Opportunity',
   OpportunityArea: 'OpportunityArea',
   Post: 'Post',
@@ -410,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "message" | "techArea" | "userArea" | "connection" | "inspiration" | "inspirationArea" | "opportunity" | "opportunityArea" | "post" | "like"
+    modelProps: "user" | "message" | "techArea" | "userArea" | "connection" | "inspiration" | "opportunity" | "opportunityArea" | "post" | "like"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -858,80 +857,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    InspirationArea: {
-      payload: Prisma.$InspirationAreaPayload<ExtArgs>
-      fields: Prisma.InspirationAreaFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.InspirationAreaFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.InspirationAreaFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload>
-        }
-        findFirst: {
-          args: Prisma.InspirationAreaFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.InspirationAreaFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload>
-        }
-        findMany: {
-          args: Prisma.InspirationAreaFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload>[]
-        }
-        create: {
-          args: Prisma.InspirationAreaCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload>
-        }
-        createMany: {
-          args: Prisma.InspirationAreaCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.InspirationAreaCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload>[]
-        }
-        delete: {
-          args: Prisma.InspirationAreaDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload>
-        }
-        update: {
-          args: Prisma.InspirationAreaUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload>
-        }
-        deleteMany: {
-          args: Prisma.InspirationAreaDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.InspirationAreaUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.InspirationAreaUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload>[]
-        }
-        upsert: {
-          args: Prisma.InspirationAreaUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$InspirationAreaPayload>
-        }
-        aggregate: {
-          args: Prisma.InspirationAreaAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateInspirationArea>
-        }
-        groupBy: {
-          args: Prisma.InspirationAreaGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.InspirationAreaGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.InspirationAreaCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.InspirationAreaCountAggregateOutputType> | number
-        }
-      }
-    }
     Opportunity: {
       payload: Prisma.$OpportunityPayload<ExtArgs>
       fields: Prisma.OpportunityFieldRefs
@@ -1328,19 +1253,12 @@ export type ConnectionScalarFieldEnum = (typeof ConnectionScalarFieldEnum)[keyof
 export const InspirationScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  subtitle: 'subtitle',
   description: 'description',
   image: 'image'
 } as const
 
 export type InspirationScalarFieldEnum = (typeof InspirationScalarFieldEnum)[keyof typeof InspirationScalarFieldEnum]
-
-
-export const InspirationAreaScalarFieldEnum = {
-  inspirationId: 'inspirationId',
-  areaId: 'areaId'
-} as const
-
-export type InspirationAreaScalarFieldEnum = (typeof InspirationAreaScalarFieldEnum)[keyof typeof InspirationAreaScalarFieldEnum]
 
 
 export const OpportunityScalarFieldEnum = {
@@ -1597,7 +1515,6 @@ export type GlobalOmitConfig = {
   userArea?: Prisma.UserAreaOmit
   connection?: Prisma.ConnectionOmit
   inspiration?: Prisma.InspirationOmit
-  inspirationArea?: Prisma.InspirationAreaOmit
   opportunity?: Prisma.OpportunityOmit
   opportunityArea?: Prisma.OpportunityAreaOmit
   post?: Prisma.PostOmit

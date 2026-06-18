@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IUserCreate, IUserUpdate, User } from "../models/User";
+import { IUserUpdate, User } from "../models/User";
 
 export const updateProfile = async (req: Request, res: Response) => {
     try {
@@ -23,6 +23,10 @@ export const updateProfile = async (req: Request, res: Response) => {
         if (description !== undefined) {
             updateData.description = description;
         }
+        if (req.body.areas !== undefined) {
+            const raw = req.body.areas;
+            updateData.areas = Array.isArray(raw) ? raw : JSON.parse(raw);
+        }
         const updatedUser = await User.updateProfile(userId, updateData);
         const publicUser = User.toPublic(updatedUser);
 
@@ -44,11 +48,31 @@ export const getProfile = async (req: Request, res: Response) => {
             return res.status(401).json({ message: 'Usuário não autenticado' });
         }
         const userId = req.user.id;
-        const user = await User.findById(userId);
+        const user = await User.findByIdWithAreas(userId);
         if (!user) {
             return res.status(404).json({ message: 'Usuário não encontrado' });
         }
-        const publicUser = User.toPublic(user);
+        const { password, ...publicUser } = user;
+        return res.status(200).json({ user: publicUser });
+    } catch (error) {
+        return res.status(500).json({ message: 'Erro interno do servidor' });
+    }
+}
+
+export const getUserById = async (req: Request, res: Response) => {
+    try {
+        if (!req.user) {
+            return res.status(401).json({ message: 'Usuário não autenticado' });
+        }
+        const { userId } = req.params;
+        if (!userId || typeof userId !== 'string' || userId.trim() === '') {
+            return res.status(400).json({ message: 'ID do usuário é obrigatório' });
+        }
+        const user = await User.findByIdWithAreas(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'Usuário não encontrado' });
+        }
+        const { password, ...publicUser } = user;
         return res.status(200).json({ user: publicUser });
     } catch (error) {
         return res.status(500).json({ message: 'Erro interno do servidor' });
@@ -81,6 +105,30 @@ export const changePassword = async (req: Request, res: Response) => {
         }
         await User.changePassword(userId, newPassword);
         return res.status(200).json({ message: 'Senha alterada com sucesso' });
+    } catch (error) {
+        return res.status(500).json({ message: 'Erro interno do servidor' });
+    }
+}
+
+export const getGuides = async (req: Request, res: Response) => {
+    try {
+        const guides = await User.getGuides();
+        const publicGuides = guides.map(({ password, ...guide }) => guide);
+        return res.status(200).json({ guides: publicGuides });
+    } catch (error) {
+        return res.status(500).json({ message: 'Erro interno do servidor' });
+    }
+};
+
+export const getGuidesByArea = async (req: Request, res: Response) => {
+    try {
+        const { areaId } = req.params;
+        if (!areaId || typeof areaId !== 'string' || areaId.trim() === '') {
+            return res.status(400).json({ message: 'ID da área é obrigatório' });
+        }
+        const guides = await User.getGuidesByArea(areaId);
+        const publicGuides = guides.map(({ password, ...guide }) => guide);
+        return res.status(200).json({ guides: publicGuides });
     } catch (error) {
         return res.status(500).json({ message: 'Erro interno do servidor' });
     }

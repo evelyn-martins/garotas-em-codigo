@@ -64,7 +64,7 @@ export default function WomanTechCard() {
 
                 <div className="mt-10 flex justify-center">
                     <a
-                        href="/women"
+                        href="/auth"
                         className="rounded-full bg-action-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-95 transition-all"
                     >
                         Explorar mais

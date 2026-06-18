@@ -32,6 +32,8 @@ export interface IUserUpdate {
     email?: string;
     image?: string | null;
     description?: string | null;
+    role?: Role;
+    areas: string[];
 }
 
 export interface IUserPublic {
@@ -42,6 +44,10 @@ export interface IUserPublic {
     image: string | null;
     description: string | null;
     role: Role;
+}
+
+export interface IUserWithAreas extends IUser {
+    areas: { area: { id: string; name: string; description: string | null } }[];
 }
 
 export class User {
@@ -131,11 +137,27 @@ export class User {
         if (updateData.image !== undefined) dataUpdate.image = updateData.image;
         if (updateData.description !== undefined) dataUpdate.description = updateData.description;
 
-        const updatedUser = await prisma.user.update({
-            where: { id },
-            data: dataUpdate,
+        return await prisma.$transaction(async (prisma) => {
+            const updatedUser = await prisma.user.update({
+                where: { id },
+                data: {
+                    ...(dataUpdate.name !== undefined && { name: dataUpdate.name }),
+                    ...(dataUpdate.username !== undefined && { username: dataUpdate.username }),
+                    ...(dataUpdate.email !== undefined && { email: dataUpdate.email }),
+                    ...(dataUpdate.image !== undefined && { image: dataUpdate.image }),
+                    ...(dataUpdate.description !== undefined && { description: dataUpdate.description }),
+                },
+            });
+            if (updateData.areas !== undefined) {
+                await prisma.userArea.deleteMany({ where: { userId: updatedUser.id } });
+                for (const areaId of updateData.areas) {
+                    await prisma.userArea.create({
+                        data: { userId: updatedUser.id, areaId }
+                    });
+                }
+            }
+            return updatedUser;
         });
-        return updatedUser;
     }
     static async changePassword(id: string, newPassword: string): Promise<void> {
         const saltRounds = 10;
@@ -151,8 +173,47 @@ export class User {
         });
         return user;
     }
+    static async findByIdWithAreas(id: string): Promise<IUserWithAreas | null> {
+        return prisma.user.findUnique({
+            where: { id },
+            include: {
+                areas: {
+                    include: { area: true },
+                },
+            },
+        });
+    }
     static toPublic(user: IUser): IUserPublic {
         const { password, ...publicUser } = user;
         return publicUser;
+    }
+    static async getGuides(): Promise<IUserWithAreas[]> {
+        const guides = await prisma.user.findMany({
+            where: { role: Role.GUIDE },
+            include: {
+                areas: {
+                    include: { area: true },
+                },
+            },
+        });
+        return guides;
+    }
+    static async getGuidesByArea(areaId: string): Promise<IUserWithAreas[]> {
+        const guides = await prisma.user.findMany({
+            where: {
+                role: Role.GUIDE,
+                areas: {
+                    some: {
+                        areaId: areaId
+                    }
+                }
+            },
+            include: {
+                areas: {
+                    include: { area: true },
+                },
+            },
+        });
+        return guides;
     }
 }

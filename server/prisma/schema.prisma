@@ -74,7 +74,6 @@ model TechArea {
   // Relacionamentos
   users         UserArea[]
   connections   Connection[]
-  inspirations  InspirationArea[]
   opportunities OpportunityArea[]
 
   @@map("tech_areas")
@@ -110,24 +109,13 @@ model Connection {
 }
 
 model Inspiration {
-  id          String          @id @default(uuid())
-  name        String          
+  id          String  @id @default(uuid())
+  name        String
+  subtitle    String
   description String
   image       String?
-  areas       InspirationArea[]
 
   @@map("inspirations")
-}
-
-model InspirationArea {
-  inspirationId String @map("inspiration_id")
-  areaId      String @map("area_id")
-
-  inspiration   Inspiration @relation(fields: [inspirationId], references: [id], onDelete: Cascade)
-  area        TechArea  @relation(fields: [areaId],      references: [id], onDelete: Cascade)
-
-  @@id([inspirationId, areaId])
-  @@map("inspirations_areas")
 }
 
 model Opportunity {

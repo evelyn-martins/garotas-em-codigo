@@ -8,8 +8,8 @@ export default function Hero (){
                     <h1 className="text-3xl font-extrabold text-color-logo sm:text-4xl lg:text-5xl">Plataforma de Conexões e Oportunidades</h1>
                     <p className="mt-4 text-base text-text sm:text-lg">Encontre inspirações, oportunidades e conexões que impulsionam sua carreira e projetos.</p>
                     <div className="mt-6 flex flex-wrap gap-3">
-                        <a href="#" className="rounded-full bg-action-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-95">Começar</a>
-                        <a href="#" className="rounded-full border border-details-primary px-6 py-3 text-sm font-semibold text-color-logo">Saiba mais</a>
+                        <a href="/auth" className="rounded-full bg-action-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-95">Começar</a>
+                        <a href="/auth" className="rounded-full border border-details-primary px-6 py-3 text-sm font-semibold text-color-logo">Saiba mais</a>
                     </div>
                 </div>
 

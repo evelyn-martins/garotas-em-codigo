@@ -57,7 +57,6 @@ export const ModelName = {
   UserArea: 'UserArea',
   Connection: 'Connection',
   Inspiration: 'Inspiration',
-  InspirationArea: 'InspirationArea',
   Opportunity: 'Opportunity',
   OpportunityArea: 'OpportunityArea',
   Post: 'Post',
@@ -141,19 +140,12 @@ export type ConnectionScalarFieldEnum = (typeof ConnectionScalarFieldEnum)[keyof
 export const InspirationScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  subtitle: 'subtitle',
   description: 'description',
   image: 'image'
 } as const
 
 export type InspirationScalarFieldEnum = (typeof InspirationScalarFieldEnum)[keyof typeof InspirationScalarFieldEnum]
-
-
-export const InspirationAreaScalarFieldEnum = {
-  inspirationId: 'inspirationId',
-  areaId: 'areaId'
-} as const
-
-export type InspirationAreaScalarFieldEnum = (typeof InspirationAreaScalarFieldEnum)[keyof typeof InspirationAreaScalarFieldEnum]
 
 
 export const OpportunityScalarFieldEnum = {

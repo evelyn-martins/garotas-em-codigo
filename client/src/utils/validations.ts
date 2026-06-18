@@ -1,4 +1,4 @@
-import type { IUserCreateErros } from "../types/user";
+import type { IUserCreateErros, IUserUpdateErrors } from "../types/user";
 
 export function ValidateUserCreate(name: string, username: string, email: string, password: string, confirmPassword: string, role: string, areas: number): IUserCreateErros {
     const errors: IUserCreateErros = {};
@@ -28,6 +28,26 @@ export function ValidateUserCreate(name: string, username: string, email: string
     }
     if (role === "guia" && areas === 0) {
         errors.areas = "Guias devem selecionar pelo menos uma área de interesse.";
+    }
+
+    return errors;
+}
+
+export function ValidateUserUpdate(name: string, username: string, email: string): IUserUpdateErrors {
+    const errors: IUserUpdateErrors = {};
+
+    if (!name.trim()) {
+        errors.name = "O nome é obrigatório.";
+    }
+    if (!username.trim()) {
+        errors.username = "O usuário é obrigatório.";
+    } else if (username.trim().length < 3) {
+        errors.username = "O nome de usuário deve ter pelo menos 3 caracteres.";
+    }
+    if (!email.trim()) {
+        errors.email = "O email é obrigatório.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errors.email = "O email é inválido.";
     }
 
     return errors;

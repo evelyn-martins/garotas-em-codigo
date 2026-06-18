@@ -27,6 +27,7 @@ export type AggregateInspiration = {
 export type InspirationMinAggregateOutputType = {
   id: string | null
   name: string | null
+  subtitle: string | null
   description: string | null
   image: string | null
 }
@@ -34,6 +35,7 @@ export type InspirationMinAggregateOutputType = {
 export type InspirationMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  subtitle: string | null
   description: string | null
   image: string | null
 }
@@ -41,6 +43,7 @@ export type InspirationMaxAggregateOutputType = {
 export type InspirationCountAggregateOutputType = {
   id: number
   name: number
+  subtitle: number
   description: number
   image: number
   _all: number
@@ -50,6 +53,7 @@ export type InspirationCountAggregateOutputType = {
 export type InspirationMinAggregateInputType = {
   id?: true
   name?: true
+  subtitle?: true
   description?: true
   image?: true
 }
@@ -57,6 +61,7 @@ export type InspirationMinAggregateInputType = {
 export type InspirationMaxAggregateInputType = {
   id?: true
   name?: true
+  subtitle?: true
   description?: true
   image?: true
 }
@@ -64,6 +69,7 @@ export type InspirationMaxAggregateInputType = {
 export type InspirationCountAggregateInputType = {
   id?: true
   name?: true
+  subtitle?: true
   description?: true
   image?: true
   _all?: true
@@ -144,6 +150,7 @@ export type InspirationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type InspirationGroupByOutputType = {
   id: string
   name: string
+  subtitle: string
   description: string
   image: string | null
   _count: InspirationCountAggregateOutputType | null
@@ -172,17 +179,17 @@ export type InspirationWhereInput = {
   NOT?: Prisma.InspirationWhereInput | Prisma.InspirationWhereInput[]
   id?: Prisma.StringFilter<"Inspiration"> | string
   name?: Prisma.StringFilter<"Inspiration"> | string
+  subtitle?: Prisma.StringFilter<"Inspiration"> | string
   description?: Prisma.StringFilter<"Inspiration"> | string
   image?: Prisma.StringNullableFilter<"Inspiration"> | string | null
-  areas?: Prisma.InspirationAreaListRelationFilter
 }
 
 export type InspirationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  subtitle?: Prisma.SortOrder
   description?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
-  areas?: Prisma.InspirationAreaOrderByRelationAggregateInput
 }
 
 export type InspirationWhereUniqueInput = Prisma.AtLeast<{
@@ -191,14 +198,15 @@ export type InspirationWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.InspirationWhereInput[]
   NOT?: Prisma.InspirationWhereInput | Prisma.InspirationWhereInput[]
   name?: Prisma.StringFilter<"Inspiration"> | string
+  subtitle?: Prisma.StringFilter<"Inspiration"> | string
   description?: Prisma.StringFilter<"Inspiration"> | string
   image?: Prisma.StringNullableFilter<"Inspiration"> | string | null
-  areas?: Prisma.InspirationAreaListRelationFilter
 }, "id">
 
 export type InspirationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  subtitle?: Prisma.SortOrder
   description?: Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.InspirationCountOrderByAggregateInput
@@ -212,6 +220,7 @@ export type InspirationScalarWhereWithAggregatesInput = {
   NOT?: Prisma.InspirationScalarWhereWithAggregatesInput | Prisma.InspirationScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Inspiration"> | string
   name?: Prisma.StringWithAggregatesFilter<"Inspiration"> | string
+  subtitle?: Prisma.StringWithAggregatesFilter<"Inspiration"> | string
   description?: Prisma.StringWithAggregatesFilter<"Inspiration"> | string
   image?: Prisma.StringNullableWithAggregatesFilter<"Inspiration"> | string | null
 }
@@ -219,38 +228,39 @@ export type InspirationScalarWhereWithAggregatesInput = {
 export type InspirationCreateInput = {
   id?: string
   name: string
+  subtitle: string
   description: string
   image?: string | null
-  areas?: Prisma.InspirationAreaCreateNestedManyWithoutInspirationInput
 }
 
 export type InspirationUncheckedCreateInput = {
   id?: string
   name: string
+  subtitle: string
   description: string
   image?: string | null
-  areas?: Prisma.InspirationAreaUncheckedCreateNestedManyWithoutInspirationInput
 }
 
 export type InspirationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  subtitle?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  areas?: Prisma.InspirationAreaUpdateManyWithoutInspirationNestedInput
 }
 
 export type InspirationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  subtitle?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  areas?: Prisma.InspirationAreaUncheckedUpdateManyWithoutInspirationNestedInput
 }
 
 export type InspirationCreateManyInput = {
   id?: string
   name: string
+  subtitle: string
   description: string
   image?: string | null
 }
@@ -258,6 +268,7 @@ export type InspirationCreateManyInput = {
 export type InspirationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  subtitle?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -265,6 +276,7 @@ export type InspirationUpdateManyMutationInput = {
 export type InspirationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  subtitle?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -272,6 +284,7 @@ export type InspirationUncheckedUpdateManyInput = {
 export type InspirationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  subtitle?: Prisma.SortOrder
   description?: Prisma.SortOrder
   image?: Prisma.SortOrder
 }
@@ -279,6 +292,7 @@ export type InspirationCountOrderByAggregateInput = {
 export type InspirationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  subtitle?: Prisma.SortOrder
   description?: Prisma.SortOrder
   image?: Prisma.SortOrder
 }
@@ -286,116 +300,25 @@ export type InspirationMaxOrderByAggregateInput = {
 export type InspirationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  subtitle?: Prisma.SortOrder
   description?: Prisma.SortOrder
   image?: Prisma.SortOrder
 }
 
-export type InspirationScalarRelationFilter = {
-  is?: Prisma.InspirationWhereInput
-  isNot?: Prisma.InspirationWhereInput
-}
-
-export type InspirationCreateNestedOneWithoutAreasInput = {
-  create?: Prisma.XOR<Prisma.InspirationCreateWithoutAreasInput, Prisma.InspirationUncheckedCreateWithoutAreasInput>
-  connectOrCreate?: Prisma.InspirationCreateOrConnectWithoutAreasInput
-  connect?: Prisma.InspirationWhereUniqueInput
-}
-
-export type InspirationUpdateOneRequiredWithoutAreasNestedInput = {
-  create?: Prisma.XOR<Prisma.InspirationCreateWithoutAreasInput, Prisma.InspirationUncheckedCreateWithoutAreasInput>
-  connectOrCreate?: Prisma.InspirationCreateOrConnectWithoutAreasInput
-  upsert?: Prisma.InspirationUpsertWithoutAreasInput
-  connect?: Prisma.InspirationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.InspirationUpdateToOneWithWhereWithoutAreasInput, Prisma.InspirationUpdateWithoutAreasInput>, Prisma.InspirationUncheckedUpdateWithoutAreasInput>
-}
-
-export type InspirationCreateWithoutAreasInput = {
-  id?: string
-  name: string
-  description: string
-  image?: string | null
-}
-
-export type InspirationUncheckedCreateWithoutAreasInput = {
-  id?: string
-  name: string
-  description: string
-  image?: string | null
-}
-
-export type InspirationCreateOrConnectWithoutAreasInput = {
-  where: Prisma.InspirationWhereUniqueInput
-  create: Prisma.XOR<Prisma.InspirationCreateWithoutAreasInput, Prisma.InspirationUncheckedCreateWithoutAreasInput>
-}
-
-export type InspirationUpsertWithoutAreasInput = {
-  update: Prisma.XOR<Prisma.InspirationUpdateWithoutAreasInput, Prisma.InspirationUncheckedUpdateWithoutAreasInput>
-  create: Prisma.XOR<Prisma.InspirationCreateWithoutAreasInput, Prisma.InspirationUncheckedCreateWithoutAreasInput>
-  where?: Prisma.InspirationWhereInput
-}
-
-export type InspirationUpdateToOneWithWhereWithoutAreasInput = {
-  where?: Prisma.InspirationWhereInput
-  data: Prisma.XOR<Prisma.InspirationUpdateWithoutAreasInput, Prisma.InspirationUncheckedUpdateWithoutAreasInput>
-}
-
-export type InspirationUpdateWithoutAreasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type InspirationUncheckedUpdateWithoutAreasInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-
-/**
- * Count Type InspirationCountOutputType
- */
-
-export type InspirationCountOutputType = {
-  areas: number
-}
-
-export type InspirationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  areas?: boolean | InspirationCountOutputTypeCountAreasArgs
-}
-
-/**
- * InspirationCountOutputType without action
- */
-export type InspirationCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the InspirationCountOutputType
-   */
-  select?: Prisma.InspirationCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * InspirationCountOutputType without action
- */
-export type InspirationCountOutputTypeCountAreasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InspirationAreaWhereInput
-}
 
 
 export type InspirationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  subtitle?: boolean
   description?: boolean
   image?: boolean
-  areas?: boolean | Prisma.Inspiration$areasArgs<ExtArgs>
-  _count?: boolean | Prisma.InspirationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["inspiration"]>
 
 export type InspirationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  subtitle?: boolean
   description?: boolean
   image?: boolean
 }, ExtArgs["result"]["inspiration"]>
@@ -403,6 +326,7 @@ export type InspirationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type InspirationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  subtitle?: boolean
   description?: boolean
   image?: boolean
 }, ExtArgs["result"]["inspiration"]>
@@ -410,26 +334,20 @@ export type InspirationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type InspirationSelectScalar = {
   id?: boolean
   name?: boolean
+  subtitle?: boolean
   description?: boolean
   image?: boolean
 }
 
-export type InspirationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "image", ExtArgs["result"]["inspiration"]>
-export type InspirationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  areas?: boolean | Prisma.Inspiration$areasArgs<ExtArgs>
-  _count?: boolean | Prisma.InspirationCountOutputTypeDefaultArgs<ExtArgs>
-}
-export type InspirationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type InspirationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type InspirationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "subtitle" | "description" | "image", ExtArgs["result"]["inspiration"]>
 
 export type $InspirationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Inspiration"
-  objects: {
-    areas: Prisma.$InspirationAreaPayload<ExtArgs>[]
-  }
+  objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    subtitle: string
     description: string
     image: string | null
   }, ExtArgs["result"]["inspiration"]>
@@ -826,7 +744,6 @@ readonly fields: InspirationFieldRefs;
  */
 export interface Prisma__InspirationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  areas<T extends Prisma.Inspiration$areasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inspiration$areasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InspirationAreaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -858,6 +775,7 @@ export interface Prisma__InspirationClient<T, Null = never, ExtArgs extends runt
 export interface InspirationFieldRefs {
   readonly id: Prisma.FieldRef<"Inspiration", 'String'>
   readonly name: Prisma.FieldRef<"Inspiration", 'String'>
+  readonly subtitle: Prisma.FieldRef<"Inspiration", 'String'>
   readonly description: Prisma.FieldRef<"Inspiration", 'String'>
   readonly image: Prisma.FieldRef<"Inspiration", 'String'>
 }
@@ -877,10 +795,6 @@ export type InspirationFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.InspirationOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationInclude<ExtArgs> | null
-  /**
    * Filter, which Inspiration to fetch.
    */
   where: Prisma.InspirationWhereUniqueInput
@@ -899,10 +813,6 @@ export type InspirationFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.InspirationOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationInclude<ExtArgs> | null
-  /**
    * Filter, which Inspiration to fetch.
    */
   where: Prisma.InspirationWhereUniqueInput
@@ -920,10 +830,6 @@ export type InspirationFindFirstArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the Inspiration
    */
   omit?: Prisma.InspirationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationInclude<ExtArgs> | null
   /**
    * Filter, which Inspiration to fetch.
    */
@@ -973,10 +879,6 @@ export type InspirationFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.InspirationOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationInclude<ExtArgs> | null
-  /**
    * Filter, which Inspiration to fetch.
    */
   where?: Prisma.InspirationWhereInput
@@ -1024,10 +926,6 @@ export type InspirationFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the Inspiration
    */
   omit?: Prisma.InspirationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationInclude<ExtArgs> | null
   /**
    * Filter, which Inspirations to fetch.
    */
@@ -1077,10 +975,6 @@ export type InspirationCreateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.InspirationOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationInclude<ExtArgs> | null
-  /**
    * The data needed to create a Inspiration.
    */
   data: Prisma.XOR<Prisma.InspirationCreateInput, Prisma.InspirationUncheckedCreateInput>
@@ -1128,10 +1022,6 @@ export type InspirationUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Inspiration
    */
   omit?: Prisma.InspirationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationInclude<ExtArgs> | null
   /**
    * The data needed to update a Inspiration.
    */
@@ -1199,10 +1089,6 @@ export type InspirationUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.InspirationOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationInclude<ExtArgs> | null
-  /**
    * The filter to search for the Inspiration to update in case it exists.
    */
   where: Prisma.InspirationWhereUniqueInput
@@ -1229,10 +1115,6 @@ export type InspirationDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.InspirationOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationInclude<ExtArgs> | null
-  /**
    * Filter which Inspiration to delete.
    */
   where: Prisma.InspirationWhereUniqueInput
@@ -1253,30 +1135,6 @@ export type InspirationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * Inspiration.areas
- */
-export type Inspiration$areasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the InspirationArea
-   */
-  select?: Prisma.InspirationAreaSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the InspirationArea
-   */
-  omit?: Prisma.InspirationAreaOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationAreaInclude<ExtArgs> | null
-  where?: Prisma.InspirationAreaWhereInput
-  orderBy?: Prisma.InspirationAreaOrderByWithRelationInput | Prisma.InspirationAreaOrderByWithRelationInput[]
-  cursor?: Prisma.InspirationAreaWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.InspirationAreaScalarFieldEnum | Prisma.InspirationAreaScalarFieldEnum[]
-}
-
-/**
  * Inspiration without action
  */
 export type InspirationDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1288,8 +1146,4 @@ export type InspirationDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the Inspiration
    */
   omit?: Prisma.InspirationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationInclude<ExtArgs> | null
 }

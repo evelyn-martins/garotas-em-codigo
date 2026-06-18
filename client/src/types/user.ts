@@ -9,6 +9,7 @@ export interface IUser {
     role: 'STUDENT' | 'GUIDE';
     createdAt: Date;
     updatedAt: Date;
+    areas?: { area: { id: string; name: string; description: string | null } }[];
 }
 
 export interface IUserCreate {
@@ -30,6 +31,30 @@ export interface IUserUpdate {
     description?: string | null;
 }
 
+export interface IUserProfile {
+    id: string;
+    name: string;
+    username: string;
+    email: string;
+    image: string | null;
+    description: string | null;
+    role: 'STUDENT' | 'GUIDE';
+    areas?: { area: { id: string; name: string; description: string | null } }[];
+}
+
+export interface IGuide {
+    id: string;
+    name: string;
+    username: string;
+    email: string;
+    image: string | null;
+    description: string | null;
+    role: 'GUIDE';
+    createdAt: Date;
+    updatedAt: Date;
+    areas: { area: { id: string; name: string; description: string | null } }[];
+}
+
 export interface IUserCreateErros {
     name?: string;
     username?: string;
@@ -37,4 +62,10 @@ export interface IUserCreateErros {
     password?: string;
     confirmPassword?: string;
     areas?: string;
+}
+
+export interface IUserUpdateErrors {
+    name?: string;
+    username?: string;
+    email?: string;
 }

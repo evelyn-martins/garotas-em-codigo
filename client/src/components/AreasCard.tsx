@@ -36,7 +36,7 @@ export default function AreasCard(){
         </div>
 
         <div className="mt-8 flex justify-center">
-          <a href="/areas" className="rounded-full bg-action-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-95">Explorar mais</a>
+          <a href="/auth" className="rounded-full bg-action-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-95">Explorar mais</a>
         </div>
       </div>
     </section>

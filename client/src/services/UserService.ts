@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { IUserUpdate } from '../types/user';
+import type { IGuide, IUserUpdate, IUserProfile } from '../types/user';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
@@ -48,5 +48,75 @@ export const UserService = {
             }
             throw error;
         }
-    }
+    },
+    updateProfile: async (formData: FormData) => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await api.put('/user/profile', formData, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            return response.data;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao atualizar perfil');
+            }
+            throw error;
+        }
+    },
+    getMyProfile: async () => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await api.get('/user/profile', {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            return response.data.user;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao buscar perfil');
+            }
+            throw error;
+        }
+    },
+    getUserById: async (userId: string): Promise<IUserProfile> => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await api.get(`/user/${userId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            return response.data.user;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao buscar perfil');
+            }
+            throw error;
+        }
+    },
+    getGuides: async (): Promise<IGuide[]> => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await api.get('/user/guides', {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            return response.data.guides;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao buscar guias');
+            }
+            throw error;
+        }
+    },
+    getGuidesByArea: async (areaId: string): Promise<IGuide[]> => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await api.get(`/user/guides/area/${areaId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            return response.data.guides;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao buscar guias por área');
+            }
+            throw error;
+        }
+    },
 }

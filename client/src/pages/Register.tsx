@@ -113,7 +113,7 @@ export default function Register() {
 
         setTimeout(() => {
             setLoading(false);
-            navigate("/dashboard");
+            navigate("/");
         }, 2000);
     };
 

@@ -12,6 +12,9 @@ export const createPost = async (req: Request, res: Response) => {
         if (!content || typeof content !== 'string' || content.trim() === '') {
             return res.status(400).json({ message: 'Conteúdo do post é obrigatório' });
         }
+        if (content.length > 280) {
+            return res.status(400).json({ message: 'O post não pode ter mais de 280 caracteres' });
+        }
         const postData: IPostCreate = { userId, content };
         const newPost = await Post.create(postData);
         return res.status(201).json(newPost);
@@ -32,6 +35,9 @@ export const updatePost = async (req: Request, res: Response) => {
         }
         if (!content || typeof content !== 'string' || content.trim() === '') {
             return res.status(400).json({ message: 'Conteúdo do post é obrigatório' });
+        }
+        if (content.length > 280) {
+            return res.status(400).json({ message: 'O post não pode ter mais de 280 caracteres' });
         }
         const updatedPost = await Post.update(postId, content);
         return res.status(200).json(updatedPost);
@@ -58,14 +64,14 @@ export const deletePost = async (req: Request, res: Response) => {
 
 export const getPostsByUser = async (req: Request, res: Response) => {
     try {
+        if (!req.user) {
+            return res.status(401).json({ message: 'Usuário não autenticado' });
+        }
         const {userId} = req.params;
         if (!userId || typeof userId !== 'string' || userId.trim() === '') {
             return res.status(400).json({ message: 'ID do usuário é obrigatório' });
         }
-        const posts = await Post.findAllByUserId(userId);
-        if (posts.length === 0) {
-            return res.status(404).json({ message: 'Nenhum post encontrado para este usuário' });
-        }
+        const posts = await Post.findAllByUserId(userId, req.user.id);
         return res.status(200).json(posts);
     } catch (error) {
         if (error instanceof Error && error.message.includes('Usuário não encontrado')) {
@@ -91,10 +97,15 @@ export const getPostById = async (req: Request, res: Response) => {
     }
 }
 
-export const getAllPosts = async (_req: Request, res: Response) => {
+export const getAllPosts = async (req: Request, res: Response) => {
     try {
-        const posts = await Post.findAll();
-        return res.status(200).json(posts);
+        if (!req.user) {
+            return res.status(401).json({ message: 'Usuário não autenticado' });
+        }
+        const page = Math.max(1, Number(req.query.page) || 1);
+        const limit = Math.min(50, Math.max(1, Number(req.query.limit) || 10));
+        const posts = await Post.findAllPaginated(page, limit, req.user.id);
+        return res.status(200).json({ posts, hasMore: posts.length === limit });
     } catch {
         return res.status(500).json({ message: 'Erro interno do servidor' });
     }

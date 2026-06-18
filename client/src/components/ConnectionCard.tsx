@@ -51,7 +51,7 @@ export default function ConnectionCard() {
 
                 <div className="mt-10 flex flex-col items-center gap-4">
                     <p className="text-sm text-text max-w-2xl">Amplie sua rede de contatos, aprenda com outras mulheres na tecnologia e descubra novas perspectivas sobre os assuntos que você se interessa.</p>
-                    <a href="#" aria-label="Comece a se conectar" className="rounded-full bg-action-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-95 transition-all">Comece a se Conectar</a>
+                    <a href="/auth" aria-label="Comece a se conectar" className="rounded-full bg-action-primary px-6 py-3 text-sm font-semibold text-white shadow-sm hover:brightness-95 transition-all">Comece a se Conectar</a>
                 </div>
             </div>
         </section>

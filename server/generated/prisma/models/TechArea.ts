@@ -168,7 +168,6 @@ export type TechAreaWhereInput = {
   description?: Prisma.StringNullableFilter<"TechArea"> | string | null
   users?: Prisma.UserAreaListRelationFilter
   connections?: Prisma.ConnectionListRelationFilter
-  inspirations?: Prisma.InspirationAreaListRelationFilter
   opportunities?: Prisma.OpportunityAreaListRelationFilter
 }
 
@@ -178,7 +177,6 @@ export type TechAreaOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   users?: Prisma.UserAreaOrderByRelationAggregateInput
   connections?: Prisma.ConnectionOrderByRelationAggregateInput
-  inspirations?: Prisma.InspirationAreaOrderByRelationAggregateInput
   opportunities?: Prisma.OpportunityAreaOrderByRelationAggregateInput
 }
 
@@ -191,7 +189,6 @@ export type TechAreaWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"TechArea"> | string | null
   users?: Prisma.UserAreaListRelationFilter
   connections?: Prisma.ConnectionListRelationFilter
-  inspirations?: Prisma.InspirationAreaListRelationFilter
   opportunities?: Prisma.OpportunityAreaListRelationFilter
 }, "id" | "name">
 
@@ -219,7 +216,6 @@ export type TechAreaCreateInput = {
   description?: string | null
   users?: Prisma.UserAreaCreateNestedManyWithoutAreaInput
   connections?: Prisma.ConnectionCreateNestedManyWithoutAreaInput
-  inspirations?: Prisma.InspirationAreaCreateNestedManyWithoutAreaInput
   opportunities?: Prisma.OpportunityAreaCreateNestedManyWithoutAreaInput
 }
 
@@ -229,7 +225,6 @@ export type TechAreaUncheckedCreateInput = {
   description?: string | null
   users?: Prisma.UserAreaUncheckedCreateNestedManyWithoutAreaInput
   connections?: Prisma.ConnectionUncheckedCreateNestedManyWithoutAreaInput
-  inspirations?: Prisma.InspirationAreaUncheckedCreateNestedManyWithoutAreaInput
   opportunities?: Prisma.OpportunityAreaUncheckedCreateNestedManyWithoutAreaInput
 }
 
@@ -239,7 +234,6 @@ export type TechAreaUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   users?: Prisma.UserAreaUpdateManyWithoutAreaNestedInput
   connections?: Prisma.ConnectionUpdateManyWithoutAreaNestedInput
-  inspirations?: Prisma.InspirationAreaUpdateManyWithoutAreaNestedInput
   opportunities?: Prisma.OpportunityAreaUpdateManyWithoutAreaNestedInput
 }
 
@@ -249,7 +243,6 @@ export type TechAreaUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   users?: Prisma.UserAreaUncheckedUpdateManyWithoutAreaNestedInput
   connections?: Prisma.ConnectionUncheckedUpdateManyWithoutAreaNestedInput
-  inspirations?: Prisma.InspirationAreaUncheckedUpdateManyWithoutAreaNestedInput
   opportunities?: Prisma.OpportunityAreaUncheckedUpdateManyWithoutAreaNestedInput
 }
 
@@ -322,20 +315,6 @@ export type TechAreaUpdateOneRequiredWithoutConnectionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TechAreaUpdateToOneWithWhereWithoutConnectionsInput, Prisma.TechAreaUpdateWithoutConnectionsInput>, Prisma.TechAreaUncheckedUpdateWithoutConnectionsInput>
 }
 
-export type TechAreaCreateNestedOneWithoutInspirationsInput = {
-  create?: Prisma.XOR<Prisma.TechAreaCreateWithoutInspirationsInput, Prisma.TechAreaUncheckedCreateWithoutInspirationsInput>
-  connectOrCreate?: Prisma.TechAreaCreateOrConnectWithoutInspirationsInput
-  connect?: Prisma.TechAreaWhereUniqueInput
-}
-
-export type TechAreaUpdateOneRequiredWithoutInspirationsNestedInput = {
-  create?: Prisma.XOR<Prisma.TechAreaCreateWithoutInspirationsInput, Prisma.TechAreaUncheckedCreateWithoutInspirationsInput>
-  connectOrCreate?: Prisma.TechAreaCreateOrConnectWithoutInspirationsInput
-  upsert?: Prisma.TechAreaUpsertWithoutInspirationsInput
-  connect?: Prisma.TechAreaWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TechAreaUpdateToOneWithWhereWithoutInspirationsInput, Prisma.TechAreaUpdateWithoutInspirationsInput>, Prisma.TechAreaUncheckedUpdateWithoutInspirationsInput>
-}
-
 export type TechAreaCreateNestedOneWithoutOpportunitiesInput = {
   create?: Prisma.XOR<Prisma.TechAreaCreateWithoutOpportunitiesInput, Prisma.TechAreaUncheckedCreateWithoutOpportunitiesInput>
   connectOrCreate?: Prisma.TechAreaCreateOrConnectWithoutOpportunitiesInput
@@ -355,7 +334,6 @@ export type TechAreaCreateWithoutUsersInput = {
   name: string
   description?: string | null
   connections?: Prisma.ConnectionCreateNestedManyWithoutAreaInput
-  inspirations?: Prisma.InspirationAreaCreateNestedManyWithoutAreaInput
   opportunities?: Prisma.OpportunityAreaCreateNestedManyWithoutAreaInput
 }
 
@@ -364,7 +342,6 @@ export type TechAreaUncheckedCreateWithoutUsersInput = {
   name: string
   description?: string | null
   connections?: Prisma.ConnectionUncheckedCreateNestedManyWithoutAreaInput
-  inspirations?: Prisma.InspirationAreaUncheckedCreateNestedManyWithoutAreaInput
   opportunities?: Prisma.OpportunityAreaUncheckedCreateNestedManyWithoutAreaInput
 }
 
@@ -389,7 +366,6 @@ export type TechAreaUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   connections?: Prisma.ConnectionUpdateManyWithoutAreaNestedInput
-  inspirations?: Prisma.InspirationAreaUpdateManyWithoutAreaNestedInput
   opportunities?: Prisma.OpportunityAreaUpdateManyWithoutAreaNestedInput
 }
 
@@ -398,7 +374,6 @@ export type TechAreaUncheckedUpdateWithoutUsersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   connections?: Prisma.ConnectionUncheckedUpdateManyWithoutAreaNestedInput
-  inspirations?: Prisma.InspirationAreaUncheckedUpdateManyWithoutAreaNestedInput
   opportunities?: Prisma.OpportunityAreaUncheckedUpdateManyWithoutAreaNestedInput
 }
 
@@ -407,7 +382,6 @@ export type TechAreaCreateWithoutConnectionsInput = {
   name: string
   description?: string | null
   users?: Prisma.UserAreaCreateNestedManyWithoutAreaInput
-  inspirations?: Prisma.InspirationAreaCreateNestedManyWithoutAreaInput
   opportunities?: Prisma.OpportunityAreaCreateNestedManyWithoutAreaInput
 }
 
@@ -416,7 +390,6 @@ export type TechAreaUncheckedCreateWithoutConnectionsInput = {
   name: string
   description?: string | null
   users?: Prisma.UserAreaUncheckedCreateNestedManyWithoutAreaInput
-  inspirations?: Prisma.InspirationAreaUncheckedCreateNestedManyWithoutAreaInput
   opportunities?: Prisma.OpportunityAreaUncheckedCreateNestedManyWithoutAreaInput
 }
 
@@ -441,7 +414,6 @@ export type TechAreaUpdateWithoutConnectionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   users?: Prisma.UserAreaUpdateManyWithoutAreaNestedInput
-  inspirations?: Prisma.InspirationAreaUpdateManyWithoutAreaNestedInput
   opportunities?: Prisma.OpportunityAreaUpdateManyWithoutAreaNestedInput
 }
 
@@ -450,59 +422,6 @@ export type TechAreaUncheckedUpdateWithoutConnectionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   users?: Prisma.UserAreaUncheckedUpdateManyWithoutAreaNestedInput
-  inspirations?: Prisma.InspirationAreaUncheckedUpdateManyWithoutAreaNestedInput
-  opportunities?: Prisma.OpportunityAreaUncheckedUpdateManyWithoutAreaNestedInput
-}
-
-export type TechAreaCreateWithoutInspirationsInput = {
-  id?: string
-  name: string
-  description?: string | null
-  users?: Prisma.UserAreaCreateNestedManyWithoutAreaInput
-  connections?: Prisma.ConnectionCreateNestedManyWithoutAreaInput
-  opportunities?: Prisma.OpportunityAreaCreateNestedManyWithoutAreaInput
-}
-
-export type TechAreaUncheckedCreateWithoutInspirationsInput = {
-  id?: string
-  name: string
-  description?: string | null
-  users?: Prisma.UserAreaUncheckedCreateNestedManyWithoutAreaInput
-  connections?: Prisma.ConnectionUncheckedCreateNestedManyWithoutAreaInput
-  opportunities?: Prisma.OpportunityAreaUncheckedCreateNestedManyWithoutAreaInput
-}
-
-export type TechAreaCreateOrConnectWithoutInspirationsInput = {
-  where: Prisma.TechAreaWhereUniqueInput
-  create: Prisma.XOR<Prisma.TechAreaCreateWithoutInspirationsInput, Prisma.TechAreaUncheckedCreateWithoutInspirationsInput>
-}
-
-export type TechAreaUpsertWithoutInspirationsInput = {
-  update: Prisma.XOR<Prisma.TechAreaUpdateWithoutInspirationsInput, Prisma.TechAreaUncheckedUpdateWithoutInspirationsInput>
-  create: Prisma.XOR<Prisma.TechAreaCreateWithoutInspirationsInput, Prisma.TechAreaUncheckedCreateWithoutInspirationsInput>
-  where?: Prisma.TechAreaWhereInput
-}
-
-export type TechAreaUpdateToOneWithWhereWithoutInspirationsInput = {
-  where?: Prisma.TechAreaWhereInput
-  data: Prisma.XOR<Prisma.TechAreaUpdateWithoutInspirationsInput, Prisma.TechAreaUncheckedUpdateWithoutInspirationsInput>
-}
-
-export type TechAreaUpdateWithoutInspirationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  users?: Prisma.UserAreaUpdateManyWithoutAreaNestedInput
-  connections?: Prisma.ConnectionUpdateManyWithoutAreaNestedInput
-  opportunities?: Prisma.OpportunityAreaUpdateManyWithoutAreaNestedInput
-}
-
-export type TechAreaUncheckedUpdateWithoutInspirationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  users?: Prisma.UserAreaUncheckedUpdateManyWithoutAreaNestedInput
-  connections?: Prisma.ConnectionUncheckedUpdateManyWithoutAreaNestedInput
   opportunities?: Prisma.OpportunityAreaUncheckedUpdateManyWithoutAreaNestedInput
 }
 
@@ -512,7 +431,6 @@ export type TechAreaCreateWithoutOpportunitiesInput = {
   description?: string | null
   users?: Prisma.UserAreaCreateNestedManyWithoutAreaInput
   connections?: Prisma.ConnectionCreateNestedManyWithoutAreaInput
-  inspirations?: Prisma.InspirationAreaCreateNestedManyWithoutAreaInput
 }
 
 export type TechAreaUncheckedCreateWithoutOpportunitiesInput = {
@@ -521,7 +439,6 @@ export type TechAreaUncheckedCreateWithoutOpportunitiesInput = {
   description?: string | null
   users?: Prisma.UserAreaUncheckedCreateNestedManyWithoutAreaInput
   connections?: Prisma.ConnectionUncheckedCreateNestedManyWithoutAreaInput
-  inspirations?: Prisma.InspirationAreaUncheckedCreateNestedManyWithoutAreaInput
 }
 
 export type TechAreaCreateOrConnectWithoutOpportunitiesInput = {
@@ -546,7 +463,6 @@ export type TechAreaUpdateWithoutOpportunitiesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   users?: Prisma.UserAreaUpdateManyWithoutAreaNestedInput
   connections?: Prisma.ConnectionUpdateManyWithoutAreaNestedInput
-  inspirations?: Prisma.InspirationAreaUpdateManyWithoutAreaNestedInput
 }
 
 export type TechAreaUncheckedUpdateWithoutOpportunitiesInput = {
@@ -555,7 +471,6 @@ export type TechAreaUncheckedUpdateWithoutOpportunitiesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   users?: Prisma.UserAreaUncheckedUpdateManyWithoutAreaNestedInput
   connections?: Prisma.ConnectionUncheckedUpdateManyWithoutAreaNestedInput
-  inspirations?: Prisma.InspirationAreaUncheckedUpdateManyWithoutAreaNestedInput
 }
 
 
@@ -566,14 +481,12 @@ export type TechAreaUncheckedUpdateWithoutOpportunitiesInput = {
 export type TechAreaCountOutputType = {
   users: number
   connections: number
-  inspirations: number
   opportunities: number
 }
 
 export type TechAreaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | TechAreaCountOutputTypeCountUsersArgs
   connections?: boolean | TechAreaCountOutputTypeCountConnectionsArgs
-  inspirations?: boolean | TechAreaCountOutputTypeCountInspirationsArgs
   opportunities?: boolean | TechAreaCountOutputTypeCountOpportunitiesArgs
 }
 
@@ -604,13 +517,6 @@ export type TechAreaCountOutputTypeCountConnectionsArgs<ExtArgs extends runtime.
 /**
  * TechAreaCountOutputType without action
  */
-export type TechAreaCountOutputTypeCountInspirationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.InspirationAreaWhereInput
-}
-
-/**
- * TechAreaCountOutputType without action
- */
 export type TechAreaCountOutputTypeCountOpportunitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OpportunityAreaWhereInput
 }
@@ -622,7 +528,6 @@ export type TechAreaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   description?: boolean
   users?: boolean | Prisma.TechArea$usersArgs<ExtArgs>
   connections?: boolean | Prisma.TechArea$connectionsArgs<ExtArgs>
-  inspirations?: boolean | Prisma.TechArea$inspirationsArgs<ExtArgs>
   opportunities?: boolean | Prisma.TechArea$opportunitiesArgs<ExtArgs>
   _count?: boolean | Prisma.TechAreaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["techArea"]>
@@ -649,7 +554,6 @@ export type TechAreaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type TechAreaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.TechArea$usersArgs<ExtArgs>
   connections?: boolean | Prisma.TechArea$connectionsArgs<ExtArgs>
-  inspirations?: boolean | Prisma.TechArea$inspirationsArgs<ExtArgs>
   opportunities?: boolean | Prisma.TechArea$opportunitiesArgs<ExtArgs>
   _count?: boolean | Prisma.TechAreaCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -661,7 +565,6 @@ export type $TechAreaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     users: Prisma.$UserAreaPayload<ExtArgs>[]
     connections: Prisma.$ConnectionPayload<ExtArgs>[]
-    inspirations: Prisma.$InspirationAreaPayload<ExtArgs>[]
     opportunities: Prisma.$OpportunityAreaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1064,7 +967,6 @@ export interface Prisma__TechAreaClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   users<T extends Prisma.TechArea$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TechArea$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserAreaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   connections<T extends Prisma.TechArea$connectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TechArea$connectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConnectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  inspirations<T extends Prisma.TechArea$inspirationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TechArea$inspirationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InspirationAreaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   opportunities<T extends Prisma.TechArea$opportunitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TechArea$opportunitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OpportunityAreaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1536,30 +1438,6 @@ export type TechArea$connectionsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.ConnectionScalarFieldEnum | Prisma.ConnectionScalarFieldEnum[]
-}
-
-/**
- * TechArea.inspirations
- */
-export type TechArea$inspirationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the InspirationArea
-   */
-  select?: Prisma.InspirationAreaSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the InspirationArea
-   */
-  omit?: Prisma.InspirationAreaOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.InspirationAreaInclude<ExtArgs> | null
-  where?: Prisma.InspirationAreaWhereInput
-  orderBy?: Prisma.InspirationAreaOrderByWithRelationInput | Prisma.InspirationAreaOrderByWithRelationInput[]
-  cursor?: Prisma.InspirationAreaWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.InspirationAreaScalarFieldEnum | Prisma.InspirationAreaScalarFieldEnum[]
 }
 
 /**

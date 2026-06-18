@@ -20,17 +20,91 @@ export interface IPostFeed {
     };
 }
 
+export interface IPostFeedWithLikes extends IPostFeed {
+    likesCount: number;
+    likedByMe: boolean;
+}
+
 export const PostService = {
-    getAll: async (): Promise<IPostFeed[]> => {
+    getPosts: async (page: number, limit: number): Promise<{ posts: IPostFeedWithLikes[]; hasMore: boolean }> => {
         const token = localStorage.getItem('token');
         try {
             const response = await api.get('/posts', {
+                params: { page, limit },
                 headers: { Authorization: `Bearer ${token}` },
             });
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 throw new Error(error.response?.data?.message || 'Erro ao buscar posts');
+            }
+            throw error;
+        }
+    },
+    getPostsByUser: async (userId: string): Promise<IPostFeedWithLikes[]> => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await api.get(`/posts/user/${userId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            return response.data;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao buscar posts da usuária');
+            }
+            throw error;
+        }
+    },
+    createPost: async (content: string): Promise<IPostFeedWithLikes> => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await api.post('/posts/create', { content }, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            return { ...response.data, likesCount: 0, likedByMe: false };
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao criar post');
+            }
+            throw error;
+        }
+    },
+    likePost: async (postId: string): Promise<void> => {
+        const token = localStorage.getItem('token');
+        try {
+            await api.post(`/posts/${postId}/like`, {}, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao curtir post');
+            }
+            throw error;
+        }
+    },
+    unlikePost: async (postId: string): Promise<void> => {
+        const token = localStorage.getItem('token');
+        try {
+            await api.delete(`/posts/${postId}/unlike`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao descurtir post');
+            }
+            throw error;
+        }
+    },
+    getPostLikes: async (postId: string): Promise<number> => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await api.get(`/posts/${postId}/likes`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            return response.data.likes;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao buscar curtidas');
             }
             throw error;
         }
