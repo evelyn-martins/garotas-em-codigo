@@ -13,6 +13,8 @@ import Mentorship from "./pages/Mentorship";
 import Chat from "./pages/Chat";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => (
   <ProtectedRoute>
@@ -41,6 +43,8 @@ export default function App() {
           <Route path="/oportunidades" element={<ProtectedLayout><Opportunities /></ProtectedLayout>} />
           <Route path="/perfil/:userId" element={<ProtectedLayout><Profile /></ProtectedLayout>} />
           <Route path="/editar-perfil" element={<ProtectedLayout><EditProfile /></ProtectedLayout>} />
+          <Route path="/sobre" element={<About />} />
+          <Route path="/contato" element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

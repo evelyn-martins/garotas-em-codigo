@@ -59,6 +59,14 @@ export default function Community() {
         setShowModal(false);
     };
 
+    const handlePostUpdated = (updated: IPostFeedWithLikes) => {
+        setPosts(prev => prev.map(p => (p.id === updated.id ? { ...p, ...updated } : p)));
+    };
+
+    const handlePostDeleted = (postId: string) => {
+        setPosts(prev => prev.filter(p => p.id !== postId));
+    };
+
     return (
         <main className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
             <section>
@@ -75,7 +83,7 @@ export default function Community() {
                 ) : (
                     <div className="flex flex-col gap-3">
                         {posts.map(post => (
-                            <PostCard key={post.id} post={post} />
+                            <PostCard key={post.id} post={post} onUpdated={handlePostUpdated} onDeleted={handlePostDeleted} />
                         ))}
                         <div ref={sentinelRef} className="h-4" />
                         {loadingMore && (

@@ -87,7 +87,7 @@ export default function EditProfile() {
             const data = await UserService.updateProfile(formData);
             updateUser(data.user);
             setSuccess(true);
-            setTimeout(() => navigate('/dashboard'), 1500);
+            setTimeout(() => navigate('/comunidade'), 1500);
         } catch (err) {
             setApiError(err instanceof Error ? err.message : 'Erro ao atualizar perfil. Tente novamente.');
         } finally {
@@ -197,7 +197,7 @@ export default function EditProfile() {
                     <div className="flex justify-end gap-3 pt-2">
                         <button
                             type="button"
-                            onClick={() => navigate('/dashboard')}
+                            onClick={() => navigate('/comunidade')}
                             disabled={loading}
                             className="cursor-pointer rounded-xl px-5 py-2.5 text-sm font-medium text-text-primary transition-colors hover:text-color-logo disabled:opacity-50"
                         >

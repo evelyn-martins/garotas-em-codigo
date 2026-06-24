@@ -24,7 +24,7 @@ export const OpportunityService = {
         }
     },
 
-    getOpportunitiesByArea: async (areaId: number): Promise<IOpportunity[]> => {
+    getOpportunitiesByArea: async (areaId: string): Promise<IOpportunity[]> => {
         const token = localStorage.getItem('token');
         try {
             const response = await api.get(`/opportunities/area/${areaId}`, {

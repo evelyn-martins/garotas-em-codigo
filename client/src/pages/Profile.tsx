@@ -84,7 +84,12 @@ export default function Profile() {
                 ) : (
                     <div className="flex flex-col gap-3">
                         {posts.map(post => (
-                            <PostCard key={post.id} post={post} />
+                            <PostCard
+                                key={post.id}
+                                post={post}
+                                onUpdated={updated => setPosts(prev => prev.map(p => (p.id === updated.id ? { ...p, ...updated } : p)))}
+                                onDeleted={postId => setPosts(prev => prev.filter(p => p.id !== postId))}
+                            />
                         ))}
                     </div>
                 )}

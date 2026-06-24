@@ -95,6 +95,33 @@ export const PostService = {
             throw error;
         }
     },
+    updatePost: async (postId: string, content: string): Promise<IPostFeedWithLikes> => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await api.put(`/posts/update/${postId}`, { content }, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            return response.data;
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao editar post');
+            }
+            throw error;
+        }
+    },
+    deletePost: async (postId: string): Promise<void> => {
+        const token = localStorage.getItem('token');
+        try {
+            await api.delete(`/posts/delete/${postId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                throw new Error(error.response?.data?.message || 'Erro ao excluir post');
+            }
+            throw error;
+        }
+    },
     getPostLikes: async (postId: string): Promise<number> => {
         const token = localStorage.getItem('token');
         try {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { OpportunityService } from '../services/opportunityService';
+import { OpportunityService } from '../services/OpportunityService';
 import type { IOpportunity } from '../types/opportunity';
 import { AreaService } from '../services/AreaService';
 import type { IArea } from '../types/areas';
@@ -13,7 +13,7 @@ export default function Opportunities() {
     const [areas, setAreas] = useState<IArea[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState<FilterCategory>('ALL');
-    const [selectedAreaId, setSelectedAreaId] = useState<number | null>(null);
+    const [selectedAreaId, setSelectedAreaId] = useState<string | null>(null);
     const [selectedOpportunity, setSelectedOpportunity] = useState<IOpportunity | null>(null);
 
     const areaOptions: DropdownOption[] = [
@@ -58,7 +58,8 @@ export default function Opportunities() {
             : opportunities.filter(o => o.type === activeCategory);
 
     const handleAreaChange = (selected: string[]) => {
-        setSelectedAreaId((prev) => (prev === Number(selected[0]) ? null : Number(selected[0])));
+        const value = selected[0];
+        setSelectedAreaId(prev => (prev === value || !value ? null : value));
     };
 
     return (
@@ -76,7 +77,7 @@ export default function Opportunities() {
                 <div className="w-full sm:w-52">
                     <Dropdown
                         options={areaOptions}
-                        values={selectedAreaId !== null ? [String(selectedAreaId)] : []}
+                        values={selectedAreaId !== null ? [selectedAreaId] : []}
                         onChange={handleAreaChange}
                         placeholder="Filtrar por área"
                     />

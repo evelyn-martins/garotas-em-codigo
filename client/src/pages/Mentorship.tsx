@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { LuCheck } from 'react-icons/lu';
 import { useAuth } from '../contexts/AuthContext';
 import { UserService } from '../services/UserService';
@@ -65,7 +65,7 @@ export default function Mentorship() {
         fetchGuides();
     }, [selectedAreaId]);
 
-    const loadConnections = async () => {
+    const loadConnections = useCallback(async () => {
         try {
             const [activeData, pendingData] = await Promise.all([
                 ConnectionService.getActiveConnections(),
@@ -77,11 +77,11 @@ export default function Mentorship() {
             setActive([]);
             setPending([]);
         }
-    };
+    }, [isGuide]);
 
     useEffect(() => {
         loadConnections();
-    }, [isGuide]);
+    }, [loadConnections]);
 
     const handleAreaChange = (selected: string[]) => {
         const value = selected[0];

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { connectSocket, disconnectSocket, getSocket } from '../services/socket';
+import { connectSocket, disconnectSocket, getSocket } from '../services/Socket';
 import { MessageService } from '../services/MessageService';
 import type {IMessage} from '../types/message';
 

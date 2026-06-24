@@ -1,15 +1,17 @@
 export default function Footer() {
 	const year = new Date().getFullYear();
 
-	const products = ["Plataforma", "Oportunidades", "Conexões"];
-	const resources = ["Blog", "Eventos", "Guias"];
-	const community = ["Fórum", "Mentorias", "Voluntariado"];
+	const links = [
+		{ heading: 'Produtos', items: ['Plataforma', 'Oportunidades', 'Conexões'] },
+		{ heading: 'Recursos', items: ['Blog', 'Eventos', 'Guias'] },
+		{ heading: 'Comunidade', items: ['Fórum', 'Mentorias', 'Voluntariado'] },
+	];
 
 	return (
 		<footer className="border-t border-action-primary/30 bg-action-primary/10">
-			<div className="mx-auto max-w-6xl px-4 py-10 sm:py-14">
-				<div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
-					<div className="max-w-xs">
+			<div className="mx-auto max-w-6xl px-4 py-10 sm:py-14 lg:px-8">
+				<div className="flex flex-col items-center gap-10 sm:flex-row sm:items-start sm:justify-between">
+					<div className="flex flex-col items-center text-center sm:max-w-xs sm:items-start sm:text-left">
 						<h3 className="text-lg font-semibold text-color-logo">Garotas em Código</h3>
 						<p className="mt-2 text-sm text-text">Conectando talentos, inspirando carreiras — uma comunidade de mulheres na tecnologia.</p>
 
@@ -30,48 +32,28 @@ export default function Footer() {
 						</div>
 					</div>
 
-					<div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
-						<div>
-							<h4 className="text-sm font-semibold text-color-logo">Produtos</h4>
-							<ul className="mt-3 space-y-2">
-								{products.map((p) => (
-									<li key={p}>
-										<a href="#" className="text-sm text-text hover:text-action-primary">{p}</a>
-									</li>
-								))}
-							</ul>
-						</div>
-
-						<div>
-							<h4 className="text-sm font-semibold text-color-logo">Recursos</h4>
-							<ul className="mt-3 space-y-2">
-								{resources.map((r) => (
-									<li key={r}>
-										<a href="#" className="text-sm text-text hover:text-action-primary">{r}</a>
-									</li>
-								))}
-							</ul>
-						</div>
-
-						<div>
-							<h4 className="text-sm font-semibold text-color-logo">Comunidade</h4>
-							<ul className="mt-3 space-y-2">
-								{community.map((c) => (
-									<li key={c}>
-										<a href="#" className="text-sm text-text hover:text-action-primary">{c}</a>
-									</li>
-								))}
-							</ul>
-						</div>
+					<div className="grid w-full grid-cols-3 gap-4 sm:w-auto sm:gap-8">
+						{links.map(col => (
+							<div key={col.heading} className="flex flex-col items-center sm:items-start">
+								<h4 className="text-sm font-semibold text-color-logo">{col.heading}</h4>
+								<ul className="mt-3 space-y-2">
+									{col.items.map(item => (
+										<li key={item}>
+											<a href="#" className="text-sm text-text transition-colors hover:text-action-primary">{item}</a>
+										</li>
+									))}
+								</ul>
+							</div>
+						))}
 					</div>
 				</div>
 
 				<div className="mt-8 border-t border-action-primary/30 pt-6 text-center text-sm text-text sm:flex sm:items-center sm:justify-between">
 					<p>© {year} Garotas em Código. Todos os direitos reservados.</p>
 					<div className="mt-3 flex items-center justify-center gap-4 sm:mt-0">
-						<a href="#" className="text-text hover:text-action-primary">Termos</a>
+						<a href="#" className="text-text transition-colors hover:text-action-primary">Termos</a>
 						<span className="text-action-primary/60">•</span>
-						<a href="#" className="text-text hover:text-action-primary">Privacidade</a>
+						<a href="#" className="text-text transition-colors hover:text-action-primary">Privacidade</a>
 					</div>
 				</div>
 			</div>
